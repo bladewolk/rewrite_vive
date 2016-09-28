@@ -21,5 +21,5 @@
         </div>
     </div>
     @endforeach
-    <a style="float:right" class="btn btn-primary" href="createnewuser" class="alert-link">Add new</a>
+    <a style="float:right" class="btn btn-primary" href="/admin/createnewuser" class="alert-link">Add new</a>
 @endsection

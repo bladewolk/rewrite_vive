@@ -26,14 +26,14 @@ class AdminController extends Controller
     }
 
 //This func create new user by Admin. Use view -> Admin/register.blade.php
-    public function registerUser(Request $request)
+    public function register(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|max:100',
             'username' => 'required|unique:users|max:50',
             'password' => 'required',
         ]);
-        $newuser = new User();
+        $newuser = new User();http://homevive.com/admin/manageusers
         $newuser->name = $request->name;
         $newuser->username = $request->username;
         $newuser->password = bcrypt($request->password);
