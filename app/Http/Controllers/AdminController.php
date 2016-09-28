@@ -19,4 +19,32 @@ class AdminController extends Controller
     {
         return view('admin.price');
     }
+
+    public function CreateNewUser()
+    {
+        return view('auth.register');
+    }
+
+//This func create new user by Admin. Use view -> Admin/register.blade.php
+    public function registerUser(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:100',
+            'username' => 'required|unique:users|max:50',
+            'password' => 'required',
+        ]);
+        $newuser = new User();
+        $newuser->name = $request->name;
+        $newuser->username = $request->username;
+        $newuser->password = bcrypt($request->password);
+        $newuser->isAdmin = $request->isAdmin;
+        $newuser->save();
+        return redirect('/admin/manageusers');
+    }
+
+    public function destroyUser($id)
+    {
+        $record = User::find($id)->delete();
+        return redirect('/admin/manageusers');
+    }
 }

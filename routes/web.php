@@ -15,9 +15,19 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+
 
 
 //Admin routes
-Route::get('/admin/manageusers', 'AdminController@manageUsers');
-Route::get('/admin/manageprices', 'AdminController@managePrices');
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'HomeController@index');
+    Route::get('/admin/manageusers', 'AdminController@manageUsers');
+    Route::get('/admin/manageprices', 'AdminController@managePrices');
+    Route::get('/admin/createnewuser', 'AdminController@CreateNewUser');
+
+    Route::post('/admin/register', 'AdminController@registerUser');
+    Route::get('/admin/destroy/{id}', 'AdminController@destroyUser');
+    Route::get('/admin/update/{id}', 'AdminController@updateUser');
+});

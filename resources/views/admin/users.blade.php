@@ -11,8 +11,9 @@
                         Username: {{ $user->username }} <br>
                         Admin permission: {{ $user->isAdmin }}
                         <div style="float: right">
-                            <button class="btn btn-primary">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <a class="btn btn-primary" href="{{ action('AdminController@updateUser', $user->id) }}">Edit</a>
+
+                            <a class="btn btn-danger" href="{{ action('AdminController@destroyUser', $user->id) }}">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -20,5 +21,5 @@
         </div>
     </div>
     @endforeach
-    <button class="btn btn-default" style="float:right; margin-right: 2%;">New user</button>
+    <a style="float:right" class="btn btn-primary" href="createnewuser" class="alert-link">Add new</a>
 @endsection
