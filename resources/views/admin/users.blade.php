@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         Name: {{ $user->name }} <br>
-                        Email: {{ $user->email }} <br>
+                        Username: {{ $user->username }} <br>
                         Admin permission: {{ $user->isAdmin }}
                         <div style="float: right">
                             <button class="btn btn-primary">Edit</button>
