@@ -20,8 +20,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->middleware('auth');
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::get('/admin/manageusers', 'AdminController@manageUsers');x
+Route::group(['middleware' => ['auth']], function () {
+
     Route::get('/admin/manageprices', 'AdminController@managePrices');
     Route::get('/admin/createnewuser', 'AdminController@CreateNewUser');
 
@@ -30,4 +30,5 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin/update/{id}', 'AdminController@updateUser');
 });
 
+Route::get('/admin/manageusers', 'AdminController@manageUsers')->middleware('admin');
 //Route::resource('/Admin/users', 'AdminControllerResource');

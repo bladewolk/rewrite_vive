@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="form-group">
-            {{ Form::open(['action' => 'AdminController@register']``) }}
+            {{ Form::open(['action' => 'AdminController@register']) }}
             <label for="comment">Name:</label>
             {{ Form::text('name','', ['class' =>'form-control']) }}
             <label for="comment">Username:</label>
