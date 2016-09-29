@@ -43,7 +43,9 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                &nbsp;<div class="row" style="display: inline-block">
+                &nbsp;
+                @if(Auth::user())
+                <div class="row" style="display: inline-block">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <input type="radio" name="device" checked="true">Oculus <br>
@@ -53,6 +55,7 @@
                             </div>
                         </div>
                 </div>
+                    @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -80,12 +83,12 @@
                                 </form>
                             </li>
                             <li>
-                                <a href="{{ action('AdminController@manageUsers') }}" class="dropdown-toggle"  role="button" aria-expanded="false">
+                                <a href="{{ action('AdminUsersControllerRes@index') }}" class="dropdown-toggle"  role="button" aria-expanded="false">
                                     Manage Users
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ action('AdminController@managePrices') }}" class="dropdown-toggle" role="button" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
                                     Price
                                 </a>
                             </li>

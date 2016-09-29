@@ -3,15 +3,13 @@
 @section('content')
     <div class="container">
         <div class="form-group">
-            {{ Form::open(['action' => 'AdminController@register']) }}
+            {{ Form::open(['action' => 'AdminUsersControllerRes@store']) }}
             <label for="comment">Name:</label>
             {{ Form::text('name','', ['class' =>'form-control']) }}
             <label for="comment">Username:</label>
             {{ Form::text('username','', ['class' =>'form-control']) }}
             <label for="comment">Password:</label>
             {{ Form::text('password','', ['class' =>'form-control']) }}
-            <label for="comment">Admin permission:</label>
-            {{ Form::checkbox('isAdmin') }} <br>
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
 
             {{ Form::close() }}
