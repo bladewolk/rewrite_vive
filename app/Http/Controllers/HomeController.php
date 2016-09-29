@@ -25,4 +25,10 @@ class HomeController extends Controller
     {
         return view('pages.index');
     }
+
+    public function ajaxPrice(Request $request)
+    {
+
+        return $request->numb*2;
+    }
 }

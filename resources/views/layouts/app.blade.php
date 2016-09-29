@@ -14,11 +14,14 @@
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script>
         window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
 </head>
 <body>
 <nav class="navbar navbar-default navbar-static-top">
@@ -45,17 +48,20 @@
             <ul class="nav navbar-nav">
                 &nbsp;
                 @if(Auth::user())
-                <div class="row" style="display: inline-block">
+                    <div class="row" style="display: inline-block">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <input type="radio" name="device" checked="true">Oculus <br>
                                 <input type="radio" name="device">HTC Vive <br>
-                                Duration <input type="number" min="1" max="240" step="1" value="10">
+                                Duration <input type="number" min="1" max="240" step="1" value="10" id="ajaxP"
+                                                name="price">
                                 <button class="btn btn-success">Add</button>
+                                <br>
+                                Calculated: <span id="calculated">?</span> $
                             </div>
                         </div>
-                </div>
-                    @endif
+                    </div>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -66,7 +72,7 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }}  <span class="caret"></span>
+                            {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -84,22 +90,23 @@
                             </li>
 
                             @if (Auth::user()->isAdmin())
-                            <li>
-                                <a href="{{ route('admin.index') }}" class="dropdown-toggle"  role="button" aria-expanded="false">
-                                    Manage Users
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
-                                    Price
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
-                                    Records
-                                </a>
-                            </li>
-                                @endif
+                                <li>
+                                    <a href="{{ route('admin.index') }}" class="dropdown-toggle" role="button"
+                                       aria-expanded="false">
+                                        Manage Users
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
+                                        Price
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
+                                        Records
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
 
@@ -112,6 +119,19 @@
 @yield('content')
 
 <!-- Scripts -->
+<script>
+    $("#ajaxP").on("change", function () {
+        console.log("Handler for .keypress() called.");
+        $.ajax({
+            type: "GET",
+            url: "/ajaxPrice",
+            data: {numb: $(this).val()},
+        }).done(function ($data) {
+            console.log($data);
+            $("#calculated").html($data);
+        });
+    });
+</script>
 <script src="/js/app.js"></script>
 </body>
 </html>
