@@ -82,6 +82,8 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
+
+                            @if (Auth::user()->isAdmin())
                             <li>
                                 <a href="{{ action('AdminUsersControllerRes@index') }}" class="dropdown-toggle"  role="button" aria-expanded="false">
                                     Manage Users
@@ -97,6 +99,7 @@
                                     Records
                                 </a>
                             </li>
+                                @endif
                         </ul>
                     </li>
 
