@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
+use App\Http\Requests\UserRequest;
 
 class AdminUsersControllerRes extends Controller
 {
@@ -35,20 +36,11 @@ class AdminUsersControllerRes extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:100',
-            'username' => 'required|unique:users|max:50',
-            'password' => 'required',
-        ]);
-        $newuser = new User();
-        http://homevive.com/admin/manageusers
-        $newuser->name = $request->name;
-        $newuser->username = $request->username;
-        $newuser->password = bcrypt($request->password);
-        $newuser->save();
-        return redirect()->action('AdminUsersControllerRes@index');
+        $input = $request->all();
+        User::create($input);
+        return redirect()->route('admin.index');
     }
 
     /**
@@ -70,7 +62,8 @@ class AdminUsersControllerRes extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.edituser', compact('user'));
     }
 
     /**
@@ -80,9 +73,10 @@ class AdminUsersControllerRes extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        User::findorFail($id)->update($request->all());
+        return redirect()->route('admin.index');
     }
 
     /**
