@@ -91,14 +91,19 @@
 
                             @if (Auth::user()->isAdmin())
                                 <li>
-                                    <a href="{{ route('admin.index') }}" class="dropdown-toggle" role="button"
+                                    <a href="{{ route('users.index') }}" class="dropdown-toggle" role="button"
                                        aria-expanded="false">
                                         Manage Users
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
-                                        Price
+                                    <a href="{{ route('prices.index') }}" class="dropdown-toggle" role="button" aria-expanded="false">
+                                        Manage Prices
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('devices.index') }}" class="dropdown-toggle" role="button" aria-expanded="false">
+                                        Manage Devices
                                     </a>
                                 </li>
                                 <li>

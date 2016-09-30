@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Devices;
 use Illuminate\Http\Request;
-use App\User;
+use App\Prices;
 use App\Http\Requests;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\PriceRequest;
 
-class AdminUsersControllerRes extends Controller
+class AdminPricesControllerRes extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,8 @@ class AdminUsersControllerRes extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('admin.users', compact('users'));
+        $prices = Prices::all();
+        return view('admin.prices.index', compact('prices'));
     }
 
     /**
@@ -27,26 +28,29 @@ class AdminUsersControllerRes extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $devices = Devices::all();
+        return view('admin.prices.create', compact('devices'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(PriceRequest $request)
     {
+
         $input = $request->all();
-        User::create($input);
-        return redirect()->route('users.index');
+        Prices::create($input);
+        return redirect()->route('prices.index');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -57,37 +61,34 @@ class AdminUsersControllerRes extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('admin.edituser', compact('user'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        User::findorFail($id)->update($request->all());
-        return redirect()->route('admin.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->action('AdminUsersControllerRes@index');
+        //
     }
 }

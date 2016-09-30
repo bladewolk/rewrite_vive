@@ -18,7 +18,7 @@ Auth::routes();
 //Admin routes
 
 
-Route::get('/', 'HomeController@index')->middleware('auth');
+Route::get('/', 'HomeController@index');
 
 /*
 Route::group(['middleware' => ['auth']], function () {
@@ -37,7 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
 //Route::resource('/Admin/users', 'AdminControllerResource');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::resource('/admin', 'AdminUsersControllerRes');
+    Route::resource('/admin/users', 'AdminUsersControllerRes');
+    Route::resource('/admin/devices', 'AdminDevicesControllerRes');
+    Route::resource('/admin/prices', 'AdminPricesControllerRes');
 });
 
 Route::get('/ajaxPrice', 'HomeController@ajaxPrice');

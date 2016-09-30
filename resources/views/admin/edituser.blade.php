@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="form-group">
-            {{ Form::model($user, ['method'=>'PATCH', 'route' =>['admin.update', $user->id]]) }}
+            {{ Form::model($user, ['method'=>'PATCH', 'route' =>['users.update', $user->id]]) }}
             <label for="comment">Name: </label>
             {{ Form::text('name','', ['class' =>'form-control', 'placeholder' => $user->name]) }}
             <label for="comment">Username:</label>
