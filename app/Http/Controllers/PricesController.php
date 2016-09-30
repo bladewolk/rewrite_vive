@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Devices;
+use Illuminate\Http\Request;
+use App\Prices;
 use App\Http\Requests;
+use App\Http\Requests\PriceRequest;
 
-class AdminDevicesControllerRes extends Controller
+class PricesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class AdminDevicesControllerRes extends Controller
      */
     public function index()
     {
-        $devices = Devices::all();
-        return view('admin.devices', compact('devices'));
+        $prices = Prices::all();
+        return view('admin.prices.index', compact('prices'));
     }
 
     /**
@@ -26,7 +28,8 @@ class AdminDevicesControllerRes extends Controller
      */
     public function create()
     {
-        //
+        $devices = Devices::all();
+        return view('admin.prices.create', compact('devices'));
     }
 
     /**
@@ -35,9 +38,13 @@ class AdminDevicesControllerRes extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PriceRequest $request)
     {
-        //
+
+        $input = $request->all();
+        Prices::create($input);
+        return redirect()->route('prices.index');
+
     }
 
     /**

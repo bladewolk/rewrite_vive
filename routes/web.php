@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/createnewuser', 'AdminController@CreateNewUser');
 
     Route::post('/admin/register', 'AdminController@register');
-   // Route::get('/admin/destroy/{id}', 'AdminController@destroyUser');
+   // Route::get('/admin/destroy/{id}', 'AdminControdller@destroyUser');
     Route::get('/admin/update/{id}', 'AdminController@updateUser');
 });
 */
@@ -37,9 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
 //Route::resource('/Admin/users', 'AdminControllerResource');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::resource('/admin/users', 'AdminUsersControllerRes');
-    Route::resource('/admin/devices', 'AdminDevicesControllerRes');
-    Route::resource('/admin/prices', 'AdminPricesControllerRes');
+    Route::resource('/admin/users', 'UsersController');
+    Route::resource('/admin/devices', 'DevicesController');
+    Route::resource('/admin/prices', 'PricesController');
 });
 
 Route::get('/ajaxPrice', 'HomeController@ajaxPrice');
