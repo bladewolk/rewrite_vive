@@ -53,70 +53,72 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 @foreach($data as $device)
-                                <input type="radio" name="device_id" checked="true" value="{{ $device->id }}"> {{ $device->name }}<br>
-                                @endforeach
-                                    Duration <input type="number" min="1" max="240" step="1" value="10" id="ajaxP" name="price">
-                                <button class="btn btn-success">Add</button>
-                                <br>
-                                Calculated: <span id="calculated">?</span> $
+                                    <input type="radio" name="device_id" checked="true" <?php // WHAT THE FUCK??? ?>
+                                           value="{{ $device->id }}"> {{ $device->name }}<br>
+                                    @endforeach
+                                    Duration <input type="number" min="1" max="240" step="1" value="10" id="ajaxP"
+                                                    name="price">
+                                    <button class="btn btn-success">Add</button>
+                                    <br>
+                                    Calculated: <span id="calculated">?</span> $
                             </div>
                         </div>
                     </div>
-                @endif
+                    @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
+                <li><a href="{{ url('/login') }}">Login</a></li>
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
 
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ url('/logout') }}"
-                                   onclick="event.preventDefault();
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{{ url('/logout') }}"
+                               onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
+                                Logout
+                            </a>
 
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
 
-                            @if (Auth::user()->isAdmin())
-                                <li>
-                                    <a href="{{ route('users.index') }}" class="dropdown-toggle" role="button"
-                                       aria-expanded="false">
-                                        Manage Users
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('prices.index') }}" class="dropdown-toggle" role="button"
-                                       aria-expanded="false">
-                                        Manage Prices
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('devices.index') }}" class="dropdown-toggle" role="button"
-                                       aria-expanded="false">
-                                        Manage Devices
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
-                                        Records
-                                    </a>
-                                </li>
-                            @endif
-                        </ul>
-                    </li>
+                        @if (Auth::user()->isAdmin())
+                        <li>
+                            <a href="{{ route('users.index') }}" class="dropdown-toggle" role="button"
+                               aria-expanded="false">
+                                Manage Users
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('prices.index') }}" class="dropdown-toggle" role="button"
+                               aria-expanded="false">
+                                Manage Prices
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('devices.index') }}" class="dropdown-toggle" role="button"
+                               aria-expanded="false">
+                                Manage Devices
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
+                                Records
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </li>
 
                 @endif
             </ul>
