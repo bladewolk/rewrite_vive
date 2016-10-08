@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Devices;
+use App\Prices;
 
 class HomeController extends Controller
 {
@@ -23,12 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.index');
+        $data = Devices::all();
+        return view('pages.index', compact('data'));
     }
 
     public function ajaxPrice(Request $request)
     {
-
-        return $request->numb*2;
+        $price = Prices::findOrFail($request->radio);
+        $price = $request->numb * ($price->price / 60);
+        return round($price, 2, 2);
     }
 }

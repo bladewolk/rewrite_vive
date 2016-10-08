@@ -47,14 +47,15 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 &nbsp;
-                @if(Auth::user())
+
+                @if(Auth::user() && isset($data))
                     <div class="row" style="display: inline-block">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <input type="radio" name="device" checked="true">Oculus <br>
-                                <input type="radio" name="device">HTC Vive <br>
-                                Duration <input type="number" min="1" max="240" step="1" value="10" id="ajaxP"
-                                                name="price">
+                                @foreach($data as $device)
+                                <input type="radio" name="device_id" checked="true" value="{{ $device->id }}"> {{ $device->name }}<br>
+                                @endforeach
+                                    Duration <input type="number" min="1" max="240" step="1" value="10" id="ajaxP" name="price">
                                 <button class="btn btn-success">Add</button>
                                 <br>
                                 Calculated: <span id="calculated">?</span> $
@@ -97,12 +98,14 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('prices.index') }}" class="dropdown-toggle" role="button" aria-expanded="false">
+                                    <a href="{{ route('prices.index') }}" class="dropdown-toggle" role="button"
+                                       aria-expanded="false">
                                         Manage Prices
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('devices.index') }}" class="dropdown-toggle" role="button" aria-expanded="false">
+                                    <a href="{{ route('devices.index') }}" class="dropdown-toggle" role="button"
+                                       aria-expanded="false">
                                         Manage Devices
                                     </a>
                                 </li>
@@ -130,7 +133,10 @@
         $.ajax({
             type: "GET",
             url: "/ajaxPrice",
-            data: {numb: $(this).val()},
+            data: {
+                numb: $(this).val(),
+                radio: $("input[name='device_id']:checked").val()
+            },
         }).done(function ($data) {
             console.log($data);
             $("#calculated").html($data);
