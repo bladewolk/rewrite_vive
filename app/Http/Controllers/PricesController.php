@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Prices;
 use App\Http\Requests;
 use App\Http\Requests\PriceRequest;
+use Illuminate\Support\Facades\DB;
 
 class PricesController extends Controller
 {
@@ -17,7 +18,10 @@ class PricesController extends Controller
      */
     public function index()
     {
-        $prices = Prices::all();
+        $prices = DB::table('prices')
+            ->join('devices', 'prices.device_id', '=', 'devices.device_id')
+            ->select('prices.*', 'devices.name')
+            ->get();
         return view('admin.prices.index', compact('prices'));
     }
 

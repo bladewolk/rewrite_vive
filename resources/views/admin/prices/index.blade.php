@@ -7,7 +7,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Device ID: {{ $price->device_id }} <br>
+                            Device ID: {{ $price->name }} <br>
                             Min Time: {{ $price->minTime }} <br>
                             Price: {{ $price->price }} <br>
                         </div>
