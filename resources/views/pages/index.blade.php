@@ -39,9 +39,16 @@
                                 Price: {{ $event->total_price }} $
                             </div>
                             <div style="float:right">
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">Cancel</button>
-                                <br> <h6>Created at {{ $event->created_at }}</h6>
+                                @if ( (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) < $event->duration)
+                                    <button class="btn btn-primary">Edit</button>
+                                    <button class="btn btn-danger">Cancel</button>
+                                    <br> <h6> {{ $event->created_at }}</h6>
+                                     <h6> Time
+                                        remaining {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }} min.</h6>
+                                @else
+                                    <button class="btn btn-info">Canceled</button>
+                                    <br> <h6> {{ $event->created_at }} </h6>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -52,7 +59,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                        {{ $events->links() }}
+                {{ $events->links() }}
             </div>
         </div>
     </div>
