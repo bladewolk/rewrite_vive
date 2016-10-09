@@ -42,4 +42,5 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/admin/prices', 'PricesController');
 });
 
-Route::get('/ajaxPrice', 'HomeController@ajaxPrice');
+Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
+Route::post('/ajaxCancel', 'HomeController@ajaxCancel');

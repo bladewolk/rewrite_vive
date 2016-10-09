@@ -31,7 +31,7 @@ class HomeController extends Controller
         $devices = Devices::all();
         $events = Events::latest()
             ->join('devices', 'events.device_id', '=', 'devices.device_id')
-            ->select('events.*','devices.name')
+            ->select('events.*', 'devices.name')
             ->Paginate(4);
         return view('pages.index', compact('devices', 'events'));
     }
@@ -46,6 +46,13 @@ class HomeController extends Controller
             ->first();
         $totalPrice = $price->price / $price->maxTime * $request->numb;
         return round($totalPrice, 2);
+    }
+
+    public function ajaxCancel(Request $request)
+    {
+        Events::where('id', $request->event_id)
+            ->update(['status' => $request->status]);
+        return $request;
     }
 
     public function create(Event $request)

@@ -114,14 +114,16 @@
 
 <!-- Scripts -->
 <script>
-    $("#ajaxP").on("change", function () {
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $("#ajaxPriceCalculate").on("change", function () {
         console.log("Handler for .keypress() called.");
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/ajaxPrice",
             data: {
                 numb: $(this).val(),
-                radio: $("input[name='device_id']:checked").val()
+                radio: $("input[name='device_id']:checked").val(),
+                _token: CSRF_TOKEN
             },
         }).done(function ($data) {
             console.log($data);
@@ -143,6 +145,27 @@
             });
         });
     }
+
+    function ajaxCancel(id) {
+
+        $.ajax({
+            type: "POST",
+            url: "/ajaxCancel",
+            data: {
+                status: 'canceled',
+                event_id: id,
+                description: $("textarea[name='description']").val(),
+                _token: CSRF_TOKEN
+            },
+        }).done(function ($data) {
+            $('#hiddenCancel' + id).hide("fast", function () {
+                $('#' + id).show("fast", function () {
+
+                });
+            });
+        });
+    }
+    ;
 
 </script>
 <script src="/js/app.js"></script>
