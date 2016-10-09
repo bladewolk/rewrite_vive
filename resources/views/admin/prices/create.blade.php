@@ -10,6 +10,8 @@
             @endforeach
             <label for="comment">Min Time:</label>
             {{ Form::text('minTime','', ['class' =>'form-control']) }}
+            <label for="comment">Max Time:</label>
+            {{ Form::text('maxTime','', ['class' =>'form-control']) }}
             <label for="comment">Price:</label>
             {{ Form::text('price','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}

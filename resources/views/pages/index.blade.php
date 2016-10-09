@@ -14,10 +14,10 @@
                             @endforeach
                             <br>
                             {{ Form::label('email', 'Duration') }}
-                            {{ Form::number('price', '10', ['id' => 'ajaxP']) }}
+                            {{ Form::number('price', '10', ['id' => 'ajaxP', 'min' => '0', 'max' => '240']) }}
                             <button class="btn btn-success">Add</button>
                             <br>
-                            {{ Form::label('calculate', 'Calculated', ['id' => 'calculated']) }}
+                            {{ Form::label('calculate', ' ', ['id' => 'calculated']) }}
                             {{ Form::close() }}
                         </div>
                     </div>

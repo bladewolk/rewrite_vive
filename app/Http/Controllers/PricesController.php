@@ -45,7 +45,6 @@ class PricesController extends Controller
      */
     public function store(PriceRequest $request)
     {
-
         $input = $request->all();
         Prices::create($input);
         return redirect()->route('prices.index');

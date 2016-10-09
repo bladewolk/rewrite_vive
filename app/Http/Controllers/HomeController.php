@@ -32,9 +32,14 @@ class HomeController extends Controller
 
     public function ajaxPrice(Request $request)
     {
-        $price = Prices::findOrFail($request->radio);
-        $price = $request->numb * ($price->price / $price->minTime);
-        return round($price, 1, 0);
+        $price = DB::table('prices')
+            ->where('device_id', '=', $request->radio)
+            ->where('minTime', '<', $request->numb)
+            ->orderBy('created_at', 'desc')
+            ->orderBy('minTime', 'desc')
+            ->first();
+        $totalPrice = $price->price / $price->maxTime * $request->numb;
+        return round($totalPrice, 2);
     }
 
     public function create()
