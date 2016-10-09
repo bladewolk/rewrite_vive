@@ -27,28 +27,71 @@
         </div>
     @endif
     @foreach($events as $event)
-        <div class="container">
+        <div class="container" id="{{$event->id}}">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div style="display: inline-block; float:left">
                                 Name: {{ $event->username }} <br>
-                                Device: {{ $event->device_id }} <br>
+                                Device: {{ $event->name }} <br>
                                 Duration: {{ $event->duration }} <br>
-                                Price: {{ $event->total_price }} $
+                                Price: {{ $event->total_price }}
                             </div>
                             <div style="float:right">
                                 @if ( (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) < $event->duration)
-                                    <button class="btn btn-primary">Edit</button>
-                                    <button class="btn btn-danger">Cancel</button>
+                                    <button class="btn btn-primary" onclick="editEvent({{ $event->id }})">Edit
+                                    </button>
+                                    <button class="btn btn-danger" onclick="cancelEvent({{ $event->id }})">Cancel
+                                    </button>
                                     <br> <h6> {{ $event->created_at }}</h6>
-                                     <h6> Time
-                                        remaining {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }} min.</h6>
+                                    <h6> Time
+                                        remaining {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }}
+                                        min.</h6>
                                 @else
                                     <button class="btn btn-info">Canceled</button>
                                     <br> <h6> {{ $event->created_at }} </h6>
                                 @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="hiddenEdit{{$event->id}}" style="display: none">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div style="display: inline-block; float:left">
+                                Name: {{ $event->username }} <br>
+                                Device: {{ $event->name }} <br>
+                                Duration: {{ $event->duration }} <br>
+                                Price: {{ $event->total_price }}
+                            </div>
+                            <div style="float:right">
+                                <button class="btn btn-primary">Update</button>
+                                Edit form
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="hiddenCancel{{$event->id}}" style="display: none">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div style="display: inline-block; float:left">
+                                Name: {{ $event->username }} <br>
+                                Device: {{ $event->name }} <br>
+                                Duration: {{ $event->duration }} <br>
+                                Price: {{ $event->total_price }}
+                            </div>
+                            <div style="float:right">
+                                <button class="btn btn-danger">Cancel</button>
+                                Cancel form
                             </div>
                         </div>
                     </div>

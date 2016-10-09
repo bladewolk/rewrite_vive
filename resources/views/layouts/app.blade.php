@@ -128,6 +128,22 @@
             $("#calculated").html("Calculated: " + $data + "$");
         });
     });
+
+    function editEvent(id) {
+        $('#' + id).hide("fast", function () {
+            $('#hiddenEdit' + id).show("fast", function () {
+
+            });
+        });
+    }
+    function cancelEvent(id) {
+        $('#' + id).hide("fast", function () {
+            $('#hiddenCancel' + id).show("fast", function () {
+
+            });
+        });
+    }
+
 </script>
 <script src="/js/app.js"></script>
 </body>

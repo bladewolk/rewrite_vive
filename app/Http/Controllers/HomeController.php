@@ -29,7 +29,10 @@ class HomeController extends Controller
     public function index()
     {
         $devices = Devices::all();
-        $events = Events::latest()->Paginate(4);
+        $events = Events::latest()
+            ->join('devices', 'events.device_id', '=', 'devices.device_id')
+            ->select('events.*','devices.name')
+            ->Paginate(4);
         return view('pages.index', compact('devices', 'events'));
     }
 
