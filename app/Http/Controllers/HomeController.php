@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function ajaxPrice(Request $request)
     {
         $price = Prices::findOrFail($request->radio);
-        $price = $request->numb * ($price->price / 60);
-        return round($price, 2, 2);
+        $price = $request->numb * ($price->price / $price->minTime);
+        return round($price, 1, 0);
     }
 }

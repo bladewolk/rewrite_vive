@@ -19,8 +19,9 @@ class PricesController extends Controller
     public function index()
     {
         $prices = DB::table('prices')
-            ->join('devices', 'prices.id', '=', 'devices.device_id')
+            ->join('devices', 'prices.device_id', '=', 'devices.device_id')
             ->select('prices.*', 'devices.name')
+            ->latest()
             ->get();
         return view('admin.prices.index', compact('prices'));
     }
