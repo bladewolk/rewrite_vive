@@ -6,14 +6,14 @@
             {{ Form::open(['route' => 'prices.store']) }}
             @foreach($devices as $device)
             {{ Form::radio('device_id', $device->device_id , true) }}
-            <label> {{ $device->name }} </label><br>
+            {{ Form::label($device->name) }}<br>
             @endforeach
-            <label for="comment">Min Time:</label>
-            {{ Form::text('minTime','', ['class' =>'form-control']) }}
-            <label for="comment">Max Time:</label>
-            {{ Form::text('maxTime','', ['class' =>'form-control']) }}
-            <label for="comment">Price:</label>
-            {{ Form::text('price','', ['class' =>'form-control']) }}
+            {{ Form::label('minTime') }}
+            {{ Form::number('minTime','', ['class' =>'form-control']) }}
+            {{ Form::label('maxTime') }}
+            {{ Form::number('maxTime','', ['class' =>'form-control']) }}
+            {{ Form::label('Price') }}
+            {{ Form::number('price','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
 
             {{ Form::close() }}
