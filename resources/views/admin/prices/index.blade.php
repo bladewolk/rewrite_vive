@@ -9,7 +9,6 @@
                         <div class="panel-body">
                             Device ID: {{ $price->name }} <br>
                             Min Time: {{ $price->minTime }} <br>
-                            Max Time: {{ $price->maxTime }} <br>
                             Price: {{ $price->price }} <br>
                         </div>
                     </div>

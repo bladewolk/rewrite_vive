@@ -51,8 +51,6 @@
                                 @else
                                     @if ($event->status == 'canceled')
                                         <button class="btn btn-info">Canceled by user</button>
-                                    @else
-                                        <button class="btn btn-info">Canceled</button>
                                     @endif
                                     <br> <h6> {{ $event->created_at }} </h6>
                                 @endif

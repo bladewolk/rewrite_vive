@@ -18,8 +18,8 @@ Auth::routes();
 //Admin routes
 
 
-Route::get('/', 'HomeController@index');
-Route::post('/create', 'HomeController@create');
+Route::get('/', ['as' => 'home', 'HomeController@index']);
+//Route::post('/create', 'HomeController@create');
 /*
 Route::group(['middleware' => ['auth']], function () {
 
@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 */
 
-
+Route::resource('/events', 'EventsController');
 //Route::get('/admin/manageusers', 'AdminController@manageUsers')->middleware('admin');
 //Route::resource('/Admin/users', 'AdminControllerResource');
 
@@ -41,6 +41,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/admin/devices', 'DevicesController');
     Route::resource('/admin/prices', 'PricesController');
 });
-
-Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
-Route::post('/ajaxCancel', 'HomeController@ajaxCancel');
+//
+//Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
+//Route::post('/ajaxCancel', 'HomeController@ajaxCancel');

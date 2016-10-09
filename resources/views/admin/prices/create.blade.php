@@ -10,8 +10,6 @@
             @endforeach
             {{ Form::label('minTime') }}
             {{ Form::number('minTime','', ['class' =>'form-control']) }}
-            {{ Form::label('maxTime') }}
-            {{ Form::number('maxTime','', ['class' =>'form-control']) }}
             {{ Form::label('Price') }}
             {{ Form::number('price','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}

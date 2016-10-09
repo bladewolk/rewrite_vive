@@ -19,6 +19,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        redirect('/');
     }
 
     /**
@@ -40,11 +41,10 @@ class HomeController extends Controller
     {
         $price = DB::table('prices')
             ->where('device_id', '=', $request->radio)
-            ->where('minTime', '<', $request->numb)
-            ->orderBy('created_at', 'desc')
+            ->where('minTime', '<=', $request->numb)
             ->orderBy('minTime', 'desc')
             ->first();
-        $totalPrice = $price->price / $price->maxTime * $request->numb;
+        $totalPrice = $price->price / 60 * $request->numb;
         return round($totalPrice, 2);
     }
 
@@ -59,17 +59,16 @@ class HomeController extends Controller
     {
         $price = DB::table('prices')
             ->where('device_id', '=', $request->device_id)
-            ->where('minTime', '<', $request->duration)
-            ->orderBy('created_at', 'desc')
+            ->where('minTime', '<=', $request->duration)
             ->orderBy('minTime', 'desc')
             ->first();
-        $totalPrice = round($price->price / $price->maxTime * $request->duration, 2);
+        $totalPrice = $price->price / 60 * $request->numb;
 
         $event = new Events;
         $event->username = $request->username;
         $event->device_id = $request->device_id;
         $event->duration = $request->duration;
-        $event->total_price = $totalPrice;
+        $event->total_price = round($totalPrice, 2);
         $event->save();
         return redirect('/');
     }
