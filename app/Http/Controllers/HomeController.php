@@ -36,4 +36,9 @@ class HomeController extends Controller
         $price = $request->numb * ($price->price / $price->minTime);
         return round($price, 1, 0);
     }
+
+    public function create()
+    {
+        return null;
+    }
 }

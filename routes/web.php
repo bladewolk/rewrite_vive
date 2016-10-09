@@ -19,7 +19,7 @@ Auth::routes();
 
 
 Route::get('/', 'HomeController@index');
-
+Route::post('/create', 'HomeController@create');
 /*
 Route::group(['middleware' => ['auth']], function () {
 
