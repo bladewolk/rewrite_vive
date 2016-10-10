@@ -16,5 +16,5 @@
         </div>
         </div>
     @endforeach
-    <a style="float:right" class="btn btn-primary" href="{{ route('devices.create') }}" class="alert-link">New Device</a>
+    <a class="btn btn-primary alert-link pull-right" href="{{ route('devices.create') }}">New Device</a>
 @endsection

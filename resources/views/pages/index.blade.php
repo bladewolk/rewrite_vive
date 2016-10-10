@@ -8,17 +8,16 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             {{ Form::open(['route' => 'events.store']) }}
-                            @foreach($devices as $device)
-                                {{ Form::radio('device_id', $device->device_id , true) }}
+                            @foreach($devices as $index => $device)
+                                {{ Form::radio('device_id', $device->device_id , !$index) }}
                                 {{ Form::label('device_name', $device->name) }}
                             @endforeach
                             <br>
                             {{ Form::label('email', 'Duration') }}
-                            {{ Form::text('duration', '10', ['id' => 'ajaxPriceCalculate', 'min' => '0', 'max' => '240', 'autocomplete' => 'off']) }}
+                            {{ Form::text('duration', '10', ['id' => 'ajaxPriceCalculate', 'min' => '0', 'max' => '240']) }}
                             <button class="btn btn-success">Add</button>
                             <br>
                             {{ Form::label('calculate', ' ', ['id' => 'calculated']) }}
-                            {{ Form::hidden('username', Auth::user()->name) }}
                             {{ Form::close() }}
                         </div>
                     </div>
@@ -32,17 +31,17 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div style="display: inline-block; float:left">
-                                Name: {{ $event->username }} <br>
-                                Device: {{ $event->name }} <br>
+                            <div class="visible-lg-inline-block pull-left">
+                                Name: {{ $event->user->name }} <br>
+                                Device: {{ $event->device->name }} <br>
                                 Duration: {{ $event->duration }} <br>
                                 Price: {{ $event->total_price }}
                             </div>
-                            <div style="float:right">
-                                @if ( (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) < $event->duration && $event->status == 'active')
-                                    <button class="btn btn-primary">Edit
+                            <div class="pull-right">
+                                @if ( (\Carbon\Carbon::now()->diffInMinutes($event->updated_at)) < $event->duration && $event->status == 'active')
+                                    <button class="btn btn-primary" onclick="editEvent({{ $event->id }})">Edit
                                     </button>
-                                    <button class="btn btn-danger">Cancel
+                                    <button class="cancel-event btn btn-danger" data-id="{{ $event->id }}">Cancel
                                     </button>
                                     <br> <h6> {{ $event->created_at }}</h6>
                                     <h6> Time
@@ -54,6 +53,46 @@
                                     @endif
                                     <br> <h6> {{ $event->created_at }} </h6>
                                 @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="hiddenEdit{{$event->id}}" style="display: none">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="visible-lg-inline-block pull-left">
+                                Name: {{ $event->user->name }} <br>
+                                Device: {{ $event->name }} <br>
+                                Duration: {{ $event->duration }} <br>
+                                Price: {{ $event->total_price }}
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn btn-primary">Update</button>
+                                Edit form
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="hiddenCancel{{$event->id}}" style="display: none">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <label>Description: </label>
+
+                            <textarea id="ajaxCancelTextarea" name="description"></textarea>
+                            <input hidden name="event_id" value="{{ $event->id }}">
+                            <div class="pull-right">
+                                <button class="cancel-button btn btn-danger" data-id="{{ $event->id }}">Do
+                                    Cancel
+                                </button>
+                                Cancel form
                             </div>
                         </div>
                     </div>

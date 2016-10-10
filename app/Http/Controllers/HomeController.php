@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Devices;
-use App\Prices;
-use App\Events;
-use App\Http\Requests\Event;
+use App\Models\Device;
+use App\Models\Event;
 
 class HomeController extends Controller
 {
@@ -19,7 +16,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        redirect('/');
     }
 
     /**
@@ -29,34 +25,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $devices = Devices::all();
-        $events = Events::latest()
-            ->join('devices', 'events.device_id', '=', 'devices.device_id')
-            ->select('events.*', 'devices.name')
-            ->Paginate(4);
-        return view('pages.index', compact('devices', 'events'));
+        return view('pages.index', [
+            'devices' => Device::all(),
+            'events' => Event::latest()->paginate(4)
+        ]);
     }
 
     public function ajaxPrice(Request $request)
     {
-        $price = DB::table('prices')
-            ->where('device_id', '=', $request->radio)
-            ->where('minTime', '<=', $request->numb)
-            ->orderBy('minTime', 'desc')
-            ->first();
-        $totalPrice = $price->price / 60 * $request->numb;
-        return round($totalPrice, 2);
+        return (new Event($request->all()))->calculatePrice();
     }
 
-    public function ajaxCancel(Request $request)
+    public function ajaxCancel(Event $event)
     {
-        Events::where('id', $request->event_id)
-            ->update(['status' => $request->status]);
-        return $request;
+        $event->update([
+            'status' => Event::STATUS_CANCELED
+        ]);
     }
 
-    public function create(Event $request)
-    {
-
-    }
 }

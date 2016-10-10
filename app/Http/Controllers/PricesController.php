@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Devices;
+use App\Models\Price;
 use Illuminate\Http\Request;
-use App\Prices;
-use App\Http\Requests;
 use App\Http\Requests\PriceRequest;
-use Illuminate\Support\Facades\DB;
+use App\Models\Device;
 
 class PricesController extends Controller
 {
@@ -18,12 +16,9 @@ class PricesController extends Controller
      */
     public function index()
     {
-        $prices = DB::table('prices')
-            ->join('devices', 'prices.device_id', '=', 'devices.device_id')
-            ->select('prices.*', 'devices.name')
-            ->latest()
-            ->get();
-        return view('admin.prices.index', compact('prices'));
+        return view('admin.prices.index', [
+            'prices' => Price::all()
+        ]);
     }
 
     /**
@@ -33,20 +28,21 @@ class PricesController extends Controller
      */
     public function create()
     {
-        $devices = Devices::all();
-        return view('admin.prices.create', compact('devices'));
+        return view('admin.prices.create', [
+            'devices' => Device::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param PriceRequest|Request $request
+     * @param Price $price
      * @return \Illuminate\Http\Response
      */
-    public function store(PriceRequest $request)
+    public function store(PriceRequest $request, Price $price)
     {
-        $input = $request->all();
-        Prices::create($input);
+        $price->fill($request->all())->save();
         return redirect()->route('prices.index');
 
     }
@@ -54,7 +50,7 @@ class PricesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -65,7 +61,7 @@ class PricesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -76,8 +72,8 @@ class PricesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -88,7 +84,7 @@ class PricesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -7,9 +7,9 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Device ID: {{ $price->name }} <br>
+                            Device: {{ $price->device->name }} <br>
                             Min Time: {{ $price->minTime }} <br>
-                            Price: {{ $price->price }} <br>
+                            Price: {{ $price->value }} <br>
                         </div>
                     </div>
                 </div>
@@ -17,5 +17,5 @@
         </div>
         </div>
     @endforeach
-    <a style="float:right" class="btn btn-primary" href="{{ route('prices.create') }}" class="alert-link">New Price</a>
+    <a class="btn btn-primary alert-link pull-right" href="{{ route('prices.create') }}">New Price</a>
 @endsection
