@@ -18,7 +18,7 @@ Auth::routes();
 //Admin routes
 
 
-Route::get('/', ['as' => 'home', 'HomeController@index']);
+Route::get('/', 'HomeController@index')->name('home');
 //Route::post('/create', 'HomeController@create');
 /*
 Route::group(['middleware' => ['auth']], function () {
