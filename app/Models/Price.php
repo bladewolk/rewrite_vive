@@ -11,4 +11,9 @@ class Price extends Model
         'minTime',
         'price',
     ];
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class);
+    }
 }

@@ -23,5 +23,5 @@
         </div>
     </div>
     @endforeach
-    <a style="float:right" class="btn btn-primary" href="{{ route('users.create') }}" class="alert-link">Add new</a>
+    <a class="btn btn-primary alert-link pull-right" href="{{ route('users.create') }}">Add new</a>
 @endsection

@@ -13,9 +13,6 @@
 
 Auth::routes();
 
-//Route::get('/admin/manageusers', 'AdminController@manageUsers')->middleware('admin');
-//Route::resource('/Admin/users', 'AdminControllerResource');
-
 Route::group([
     'middleware' => 'auth'
 ], function () {

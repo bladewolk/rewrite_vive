@@ -32,13 +32,13 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div style="display: inline-block; float:left">
+                            <div class="visible-xs-inline-block pull-left">
                                 Name: {{ $event->username }} <br>
                                 Device: {{ $event->device->name }} <br>
                                 Duration: {{ $event->duration }} <br>
                                 Price: {{ $event->total_price }}
                             </div>
-                            <div style="float:right">
+                            <div class="pull-right">
                                 @if ( (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) < $event->duration && $event->status == 'active')
                                     <button class="btn btn-primary" onclick="editEvent({{ $event->id }})">Edit
                                     </button>
@@ -65,13 +65,13 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div style="display: inline-block; float:left">
+                            <div class="visible-xs-inline-block pull-left">
                                 Name: {{ $event->username }} <br>
                                 Device: {{ $event->name }} <br>
                                 Duration: {{ $event->duration }} <br>
                                 Price: {{ $event->total_price }}
                             </div>
-                            <div style="float:right">
+                            <div class="pull-right">
                                 <button class="btn btn-primary">Update</button>
                                 Edit form
                             </div>
@@ -89,7 +89,7 @@
 
                             <textarea id="ajaxCancelTextarea" name="description"></textarea>
                             <input hidden name="event_id" value="{{ $event->id }}">
-                            <div style="float:right">
+                            <div class="pull-right">
                                 <button class="cancel-button btn btn-danger" data-id="{{ $event->id }}">Do
                                     Cancel
                                 </button>
