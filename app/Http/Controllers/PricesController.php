@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Devices;
+use App\Device;
 use Illuminate\Http\Request;
-use App\Prices;
+use App\Price;
 use App\Http\Requests;
 use App\Http\Requests\PriceRequest;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +33,7 @@ class PricesController extends Controller
      */
     public function create()
     {
-        $devices = Devices::all();
+        $devices = Device::all();
         return view('admin.prices.create', compact('devices'));
     }
 
@@ -46,7 +46,7 @@ class PricesController extends Controller
     public function store(PriceRequest $request)
     {
         $input = $request->all();
-        Prices::create($input);
+        Price::create($input);
         return redirect()->route('prices.index');
 
     }

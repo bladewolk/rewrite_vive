@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Devices;
+use App\Device;
 use App\Http\Requests;
 
 class DevicesController extends Controller
@@ -15,7 +15,7 @@ class DevicesController extends Controller
      */
     public function index()
     {
-        $devices = Devices::all();
+        $devices = Device::all();
         return view('admin.devices', compact('devices'));
     }
 

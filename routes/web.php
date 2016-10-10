@@ -11,36 +11,26 @@
 |
 */
 
-
 Auth::routes();
 
-
-//Admin routes
-
-
-Route::get('/', 'HomeController@index')->name('home');
-Route::post('/create', 'HomeController@create');
-/*
-Route::group(['middleware' => ['auth']], function () {
-
-    Route::get('/admin/manageprices', 'AdminController@managePrices');
-    Route::get('/admin/createnewuser', 'AdminController@CreateNewUser');
-
-    Route::post('/admin/register', 'AdminController@register');
-   // Route::get('/admin/destroy/{id}', 'AdminControdller@destroyUser');
-    Route::get('/admin/update/{id}', 'AdminController@updateUser');
-});
-*/
-
-Route::resource('/events', 'EventsController');
 //Route::get('/admin/manageusers', 'AdminController@manageUsers')->middleware('admin');
 //Route::resource('/Admin/users', 'AdminControllerResource');
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::resource('/admin/users', 'UsersController');
-    Route::resource('/admin/devices', 'DevicesController');
-    Route::resource('/admin/prices', 'PricesController');
+Route::group([
+    'middleware' => 'auth'
+], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::post('/ajaxPrice/{device}', 'HomeController@ajaxPrice');
+    Route::post('/ajaxCancel/{event}', 'HomeController@ajaxCancel');
+
+    Route::resource('/events', 'EventsController');
+
+    Route::group([
+        'prefix' => 'admin',
+        'middleware' => 'admin'
+    ], function () {
+        Route::resource('/users', 'UsersController');
+        Route::resource('/devices', 'DevicesController');
+        Route::resource('/prices', 'PricesController');
+    });
 });
-//
-Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
-Route::post('/ajaxCancel', 'HomeController@ajaxCancel');

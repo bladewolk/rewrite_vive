@@ -115,20 +115,58 @@
 <!-- Scripts -->
 <script>
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $('#ajaxPriceCalculate').on('change keyup', function () {
+
+    function calculate() {
         $.ajax({
-            type: "POST",
-            url: "/ajaxPrice",
+            type: 'POST',
+            url: '/ajaxPrice/' + $('input[name=device_id]:checked').val(),
             data: {
-                numb: $(this).val(),
-                radio: $("input[name='device_id']:checked").val(),
+                duration: $(this).val(),
                 _token: CSRF_TOKEN
-            },
-        }).done(function ($data) {
-            console.log($data);
-            $('#calculated').html("Calculated: " + $data + "$");
+            }
+        }).done(function (price) {
+            $('#calculated').html('Calculated: $' + price);
+        });
+    }
+
+    $('#ajaxPriceCalculate').on('change keyup', calculate);
+    $('input[name=device_id]').change(calculate);
+
+    $('.cancel-button').click(function () {
+        var $this = $(this);
+        var id = $this.data('id');
+
+        $.ajax({
+            type: 'POST',
+            url: '/ajaxCancel/' + id,
+            data: {
+                description: $('textarea[name=description]').val(),
+                _token: CSRF_TOKEN
+            }
+        }).done(function () {
+            $this.hide('fast', function () {
+                // TODO: refactor this
+                $('#' + id).show('fast');
+            })
         });
     });
+
+    $('.cancel-event').click(function () {
+        var id = $(this).data('id');
+
+        $('#' + id).hide('fast', function () {
+            $('#hiddenCancel' + id).show('fast');
+        })
+    });
+
+    function editEvent(id) {
+        $('#' + id).hide("fast", function () {
+            $('#hiddenEdit' + id).show("fast", function () {
+
+            });
+        });
+    }
+
 </script>
 <script src="/js/app.js"></script>
 </body>
