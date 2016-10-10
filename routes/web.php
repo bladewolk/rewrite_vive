@@ -19,7 +19,7 @@ Auth::routes();
 
 
 Route::get('/', 'HomeController@index')->name('home');
-//Route::post('/create', 'HomeController@create');
+Route::post('/create', 'HomeController@create');
 /*
 Route::group(['middleware' => ['auth']], function () {
 
@@ -42,5 +42,5 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/admin/prices', 'PricesController');
 });
 //
-//Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
-//Route::post('/ajaxCancel', 'HomeController@ajaxCancel');
+Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
+Route::post('/ajaxCancel', 'HomeController@ajaxCancel');

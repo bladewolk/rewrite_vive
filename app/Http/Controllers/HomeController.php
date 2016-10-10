@@ -57,19 +57,6 @@ class HomeController extends Controller
 
     public function create(Event $request)
     {
-        $price = DB::table('prices')
-            ->where('device_id', '=', $request->device_id)
-            ->where('minTime', '<=', $request->duration)
-            ->orderBy('minTime', 'desc')
-            ->first();
-        $totalPrice = $price->price / 60 * $request->numb;
 
-        $event = new Events;
-        $event->username = $request->username;
-        $event->device_id = $request->device_id;
-        $event->duration = $request->duration;
-        $event->total_price = round($totalPrice, 2);
-        $event->save();
-        return redirect('/');
     }
 }

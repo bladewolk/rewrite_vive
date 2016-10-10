@@ -115,8 +115,7 @@
 <!-- Scripts -->
 <script>
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $("#ajaxPriceCalculate").on("change", function () {
-        console.log("Handler for .keypress() called.");
+    $('#ajaxPriceCalculate').on('change keyup', function () {
         $.ajax({
             type: "POST",
             url: "/ajaxPrice",
@@ -127,46 +126,9 @@
             },
         }).done(function ($data) {
             console.log($data);
-            $("#calculated").html("Calculated: " + $data + "$");
+            $('#calculated').html("Calculated: " + $data + "$");
         });
     });
-
-    function editEvent(id) {
-        $('#' + id).hide("fast", function () {
-            $('#hiddenEdit' + id).show("fast", function () {
-
-            });
-        });
-    }
-    function cancelEvent(id) {
-        $('#' + id).hide("fast", function () {
-            $('#hiddenCancel' + id).show("fast", function () {
-
-            });
-        });
-    }
-
-    function ajaxCancel(id) {
-
-        $.ajax({
-            type: "POST",
-            url: "/ajaxCancel",
-            data: {
-                status: 'canceled',
-                event_id: id,
-                description: $("textarea[name='description']").val(),
-                _token: CSRF_TOKEN
-            },
-        }).done(function ($data) {
-            $('#hiddenCancel' + id).hide("fast", function () {
-                $('#' + id).show("fast", function () {
-
-                });
-            });
-        });
-    }
-    ;
-
 </script>
 <script src="/js/app.js"></script>
 </body>

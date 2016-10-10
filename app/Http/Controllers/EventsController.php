@@ -39,9 +39,22 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Event $request)
     {
-        //
+        $price = DB::table('prices')
+            ->where('device_id', '=', $request->device_id)
+            ->where('minTime', '<=', $request->duration)
+            ->orderBy('minTime', 'desc')
+            ->first();
+        $totalPrice = round($price->price / 60 * $request->duration, 2);
+
+        $event = new Events;
+        $event->username = $request->username;
+        $event->device_id = $request->device_id;
+        $event->duration = $request->duration;
+        $event->total_price = $totalPrice;
+        $event->save();
+        return redirect()->route('home');
     }
 
     /**
