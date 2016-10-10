@@ -26,13 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $devices = Device::all();
-        $events = Event::latest()
-            ->paginate(4);
-
         return view('pages.index', [
-            'devices' => $devices,
-            'events' => $events
+            'devices' => Device::all(),
+            'events' => $events = Event::latest()->paginate(4)
         ]);
     }
 

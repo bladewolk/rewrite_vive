@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Device;
-use App\Models\Price;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
 
 class EventsController extends Controller
@@ -18,7 +16,7 @@ class EventsController extends Controller
 
     public function index()
     {
-
+        //
     }
 
     /**
@@ -35,24 +33,22 @@ class EventsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param Event $event
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Event $event)
     {
-        // TODO: refactor!
-        $price = DB::table('prices')
-            ->where('device_id', '=', $request->device_id)
-            ->where('minTime', '<=', $request->duration)
-            ->orderBy('minTime', 'desc')
-            ->first();
-        $totalPrice = $price->price / 60 * $request->numb;
+        $event->fill($request->all());
+        $event->user_id = Auth::user()->id;
 
-        $event = new Event;
-        $event->username = $request->username;
-        $event->device_id = $request->device_id;
-        $event->duration = $request->duration;
-        $event->total_price = round($totalPrice, 2);
+        $price = $event->device->price
+            ->where('minTime', '<=', $request->duration)
+            ->first()
+            ->price;
+
+        $event->total_price = round($price / 60 * $request->duration, 2);
         $event->save();
+
         return redirect('/');
     }
 

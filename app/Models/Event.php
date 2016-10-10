@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     const STATUS_CANCELED = 'canceled';
+    const STATUS_ACTIVE = 'active';
 
     protected $fillable = [
         'device_id',
-        'username',
         'duration',
         'total_price',
     ];
@@ -18,5 +18,10 @@ class Event extends Model
     public function device()
     {
         return $this->belongsTo(Device::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

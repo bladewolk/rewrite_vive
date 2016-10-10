@@ -8,8 +8,8 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             {{ Form::open(['route' => 'events.store']) }}
-                            @foreach($devices as $device)
-                                {{ Form::radio('device_id', $device->device_id , true) }}
+                            @foreach($devices as $index => $device)
+                                {{ Form::radio('device_id', $device->device_id , !$index) }}
                                 {{ Form::label('device_name', $device->name) }}
                             @endforeach
                             <br>
@@ -18,7 +18,6 @@
                             <button class="btn btn-success">Add</button>
                             <br>
                             {{ Form::label('calculate', ' ', ['id' => 'calculated']) }}
-                            {{ Form::hidden('username', Auth::user()->name) }}
                             {{ Form::close() }}
                         </div>
                     </div>
@@ -32,8 +31,8 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="visible-xs-inline-block pull-left">
-                                Name: {{ $event->username }} <br>
+                            <div class="visible-lg-inline-block pull-left">
+                                Name: {{ $event->user->name }} <br>
                                 Device: {{ $event->device->name }} <br>
                                 Duration: {{ $event->duration }} <br>
                                 Price: {{ $event->total_price }}
@@ -65,8 +64,8 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="visible-xs-inline-block pull-left">
-                                Name: {{ $event->username }} <br>
+                            <div class="visible-lg-inline-block pull-left">
+                                Name: {{ $event->user->name }} <br>
                                 Device: {{ $event->name }} <br>
                                 Duration: {{ $event->duration }} <br>
                                 Price: {{ $event->total_price }}

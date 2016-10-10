@@ -15,8 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('status')->default('active');
-            $table->string('username');
+            $table->string('status')->default(\App\Models\Event::STATUS_ACTIVE);
+            $table->integer('user_id');
             $table->integer('device_id');
             $table->integer('duration');
             $table->float('total_price');
