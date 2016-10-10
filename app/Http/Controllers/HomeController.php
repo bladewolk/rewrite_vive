@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function ajaxPrice(Request $request)
     {
-        return (new Event($request->all()))->getPrice();
+        return (new Event($request->all()))->calculatePrice();
     }
 
     public function ajaxCancel(Event $event)

@@ -40,7 +40,7 @@ class EventsController extends Controller
     {
         $event->fill($request->all());
         $event->user_id = Auth::user()->id;
-        $event->total_price = $event->getPrice();
+        $event->total_price = $event->calculatePrice();
         $event->save();
 
         return redirect('/');

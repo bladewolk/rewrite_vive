@@ -35,7 +35,7 @@
                                 Name: {{ $event->user->name }} <br>
                                 Device: {{ $event->device->name }} <br>
                                 Duration: {{ $event->duration }} <br>
-                                Price: {{ $event->getPrice() }}
+                                Price: {{ $event->total_price }}
                             </div>
                             <div class="pull-right">
                                 @if ( (\Carbon\Carbon::now()->diffInMinutes($event->updated_at)) < $event->duration && $event->status == 'active')
@@ -68,7 +68,7 @@
                                 Name: {{ $event->user->name }} <br>
                                 Device: {{ $event->name }} <br>
                                 Duration: {{ $event->duration }} <br>
-                                Price: {{ $event->getPrice() }}
+                                Price: {{ $event->total_price }}
                             </div>
                             <div class="pull-right">
                                 <button class="btn btn-primary">Update</button>
