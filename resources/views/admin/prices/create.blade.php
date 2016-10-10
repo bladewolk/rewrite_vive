@@ -11,7 +11,7 @@
             {{ Form::label('minTime') }}
             {{ Form::number('minTime','', ['class' =>'form-control']) }}
             {{ Form::label('Price') }}
-            {{ Form::number('price','', ['class' =>'form-control']) }}
+            {{ Form::number('value','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
 
             {{ Form::close() }}

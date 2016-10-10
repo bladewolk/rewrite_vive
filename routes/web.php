@@ -17,8 +17,8 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::post('/ajaxPrice/{device}', 'HomeController@ajaxPrice');
-    Route::post('/ajaxCancel/{event}', 'HomeController@ajaxCancel');
+    Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
+    Route::post('/ajaxCancel', 'HomeController@ajaxCancel');
 
     Route::resource('/events', 'EventsController');
 

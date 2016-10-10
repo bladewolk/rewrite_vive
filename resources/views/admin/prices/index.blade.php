@@ -9,7 +9,7 @@
                         <div class="panel-body">
                             Device: {{ $price->device->name }} <br>
                             Min Time: {{ $price->minTime }} <br>
-                            Price: {{ $price->price }} <br>
+                            Price: {{ $price->value }} <br>
                         </div>
                     </div>
                 </div>

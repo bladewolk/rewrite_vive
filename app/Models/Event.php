@@ -24,4 +24,11 @@ class Event extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getPrice()
+    {
+        return $this->exists ?
+            $this->total_price :
+            round($this->device->price->value / 60 * $this->duration, 2);
+    }
 }

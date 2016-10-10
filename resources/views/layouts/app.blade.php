@@ -113,8 +113,9 @@
     function calculate() {
         $.ajax({
             type: 'POST',
-            url: '/ajaxPrice/' + $('input[name=device_id]:checked').val(),
+            url: '/ajaxPrice',
             data: {
+                device_id: $('input[name=device_id]:checked').val(),
                 duration: $(this).val(),
                 _token: CSRF_TOKEN
             }

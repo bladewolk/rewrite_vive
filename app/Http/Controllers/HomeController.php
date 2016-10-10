@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Device;
 use App\Models\Event;
 
@@ -28,17 +27,13 @@ class HomeController extends Controller
     {
         return view('pages.index', [
             'devices' => Device::all(),
-            'events' => $events = Event::latest()->paginate(4)
+            'events' => Event::latest()->paginate(4)
         ]);
     }
 
-    public function ajaxPrice(Request $request, Device $device)
+    public function ajaxPrice(Request $request)
     {
-        $price = $device->price
-            ->where('minTime', '<=', $request->duration)
-            ->first()->price;
-
-        return round($price / 60 * $request->duration, 2);
+        return (new Event($request->all()))->getPrice();
     }
 
     public function ajaxCancel(Event $event)

@@ -17,7 +17,7 @@ class CreatePricesTable extends Migration
             $table->increments('id');
             $table->integer('device_id');
             $table->integer('minTime');
-            $table->float('price');
+            $table->float('value');
             $table->timestamps();
         });
     }

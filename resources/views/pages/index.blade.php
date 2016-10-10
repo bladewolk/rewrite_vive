@@ -35,10 +35,10 @@
                                 Name: {{ $event->user->name }} <br>
                                 Device: {{ $event->device->name }} <br>
                                 Duration: {{ $event->duration }} <br>
-                                Price: {{ $event->total_price }}
+                                Price: {{ $event->getPrice() }}
                             </div>
                             <div class="pull-right">
-                                @if ( (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) < $event->duration && $event->status == 'active')
+                                @if ( (\Carbon\Carbon::now()->diffInMinutes($event->updated_at)) < $event->duration && $event->status == 'active')
                                     <button class="btn btn-primary" onclick="editEvent({{ $event->id }})">Edit
                                     </button>
                                     <button class="cancel-event btn btn-danger" data-id="{{ $event->id }}">Cancel
@@ -68,7 +68,7 @@
                                 Name: {{ $event->user->name }} <br>
                                 Device: {{ $event->name }} <br>
                                 Duration: {{ $event->duration }} <br>
-                                Price: {{ $event->total_price }}
+                                Price: {{ $event->getPrice() }}
                             </div>
                             <div class="pull-right">
                                 <button class="btn btn-primary">Update</button>

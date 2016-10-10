@@ -40,13 +40,7 @@ class EventsController extends Controller
     {
         $event->fill($request->all());
         $event->user_id = Auth::user()->id;
-
-        $price = $event->device->price
-            ->where('minTime', '<=', $request->duration)
-            ->first()
-            ->price;
-
-        $event->total_price = round($price / 60 * $request->duration, 2);
+        $event->total_price = $event->getPrice();
         $event->save();
 
         return redirect('/');

@@ -9,7 +9,7 @@ class Price extends Model
     protected $fillable = [
         'device_id',
         'minTime',
-        'price',
+        'value',
     ];
 
     public function device()
