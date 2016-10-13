@@ -27,6 +27,6 @@ class Event extends Model
 
     public function calculatePrice()
     {
-        return ceil($this->device->price->value * $this->duration, 2);
+        return ceil($this->device->price->value * $this->duration);
     }
 }
