@@ -14,7 +14,7 @@ class DevicesController extends Controller
      */
     public function index()
     {
-        return view('admin.devices', [
+        return view('devices.index', [
             'devices' => Device::all()
         ]);
     }

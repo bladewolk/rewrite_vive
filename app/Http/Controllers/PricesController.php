@@ -16,7 +16,7 @@ class PricesController extends Controller
      */
     public function index()
     {
-        return view('admin.prices.index', [
+        return view('prices.index', [
             'prices' => Price::all()
         ]);
     }
@@ -28,7 +28,7 @@ class PricesController extends Controller
      */
     public function create()
     {
-        return view('admin.prices.create', [
+        return view('prices.create', [
             'devices' => Device::all()
         ]);
     }

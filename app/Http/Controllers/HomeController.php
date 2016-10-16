@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -33,7 +34,13 @@ class HomeController extends Controller
 
     public function ajaxPrice(Request $request)
     {
-        return (new Event($request->all()))->calculatePrice();
+        $price = DB::table('prices')
+            ->where('device_id', '=', $request->device_id)
+            ->where('minTime', '<=', $request->duration)
+            ->orderBy('created_at', 'desc')
+            ->orderBy('minTime', 'desc')
+            ->first();
+        return ceil($price->value * $request->duration);
     }
 
     public function ajaxCancel(Event $event)

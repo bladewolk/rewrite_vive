@@ -14,7 +14,7 @@
                             @endforeach
                             <br>
                             {{ Form::label('email', 'Duration') }}
-                            {{ Form::text('duration', '10', ['id' => 'ajaxPriceCalculate', 'min' => '0', 'max' => '240']) }}
+                            {{ Form::text('duration', '10', ['id' => 'ajaxPriceCalculate', 'min' => '0', 'max' => '240', 'autocomplete' => 'off']) }}
                             <button class="btn btn-success">Add</button>
                             <br>
                             {{ Form::label('calculate', ' ', ['id' => 'calculated']) }}

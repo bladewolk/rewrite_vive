@@ -10,7 +10,7 @@
             @endforeach
             {{ Form::label('minTime') }}
             {{ Form::number('minTime','', ['class' =>'form-control']) }}
-            {{ Form::label('Price') }}
+            {{ Form::label('Price for 1 minute') }}
             {{ Form::number('value','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
 
