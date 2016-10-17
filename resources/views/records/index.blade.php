@@ -18,5 +18,11 @@
         </div>
         </div>
     @endforeach
-    <a class="btn btn-primary alert-link pull-right" href="{{ route('prices.create') }}">New Price</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {{ $events->links() }}
+            </div>
+        </div>
+    </div>
 @endsection

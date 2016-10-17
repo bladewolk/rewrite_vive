@@ -17,7 +17,7 @@ class RecordsController extends Controller
     public function index()
     {
         return view('records.index', [
-           'events' => Record::all()
+           'events' => Record::latest()->paginate(5)
         ]);
     }
 

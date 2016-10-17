@@ -38,22 +38,31 @@
                                 Price: {{ $event->total_price }}
                             </div>
                             <div class="pull-right">
-                                @if ( (\Carbon\Carbon::now()->diffInMinutes($event->updated_at)) < $event->duration && $event->status == 'active')
-                                    <a class="btn btn-primary" href="{{ route('events.edit', ['id' => $event->id]) }}">Edit
-                                    </a>
-                                    <button class="cancel-event btn btn-danger" data-id="{{ $event->id }}">Cancel
-                                    </button>
-                                    <br> <h6> {{ $event->created_at }}</h6>
-                                    <h6> Time
-                                        remaining {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }}
-                                        min.</h6>
-                                @else
-                                    @if ($event->status == 'canceled')
-                                        <button class="btn btn-info">Canceled by user</button>
+                                @if ($event->status == 'active')
+
+                                    @if ((\Carbon\Carbon::now()->diffInMinutes($event->created_at)) <= $event->duration)
+                                        <a class="btn btn-primary"
+                                           href="{{ route('events.edit', ['id' => $event->id]) }}">Edit
+                                        </a>
+                                        <br> <h6> {{ $event->created_at }}</h6>
+                                        <h6> Time
+                                            remaining {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }}
+                                            min.</h6>
+                                    @else
+
+                                        <br><h4> Canceled </h4>
+                                        <h6> {{ $event->created_at }} </h6>
+
                                     @endif
-                                    <br><h4> Canceled </h4> <br>
+
+
+                                @else
+
+                                    <br><h4> Canceled by user </h4>
                                     <h6> {{ $event->created_at }} </h6>
+
                                 @endif
+
                             </div>
                         </div>
                     </div>

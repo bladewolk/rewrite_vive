@@ -10,6 +10,7 @@ class Event extends Model
     const STATUS_ACTIVE = 'active';
 
     protected $fillable = [
+        'status',
         'device_id',
         'duration',
         'total_price',
