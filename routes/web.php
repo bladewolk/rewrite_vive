@@ -29,5 +29,6 @@ Route::group([
         Route::resource('/users', 'UsersController');
         Route::resource('/devices', 'DevicesController');
         Route::resource('/prices', 'PricesController');
+        Route::resource('/records', 'RecordsController');
     });
 });

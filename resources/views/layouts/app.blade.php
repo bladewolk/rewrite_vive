@@ -90,7 +90,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" role="button" aria-expanded="false">
+                                    <a href="{{ route('records.index') }}" class="dropdown-toggle" role="button" aria-expanded="false">
                                         Records
                                     </a>
                                 </li>

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
 {
+    protected $fillable = [
+        'name'
+    ];
     public function price()
     {
         return $this->hasOne(Price::class);

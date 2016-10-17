@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
-use App\Models\Device;
+use App\Models\Record;
+use App\Http\Requests;
 
-class DevicesController extends Controller
+class RecordsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,8 @@ class DevicesController extends Controller
      */
     public function index()
     {
-        return view('devices.index', [
-            'devices' => Device::all()
+        return view('records.index', [
+           'events' => Record::all()
         ]);
     }
 
@@ -26,25 +28,24 @@ class DevicesController extends Controller
      */
     public function create()
     {
-        return view('devices.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        Device::create($request->all());
-        return redirect()->route('devices.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -55,38 +56,34 @@ class DevicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('devices.edit', [
-            'device' => Device::findOrFail($id)
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        Device::findorFail($id)->update($request->all());
-        return redirect()->route('devices.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Device::find($id)->delete();
-        return redirect()->route('devices.index');
+        //
     }
 }

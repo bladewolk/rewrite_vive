@@ -3,17 +3,10 @@
 @section('content')
     <div class="container">
         <div class="form-group">
-            {{ Form::open(['route' => 'prices.store']) }}
-            @foreach($devices as $index => $device)
-                {{ Form::radio('device_id', $device->id, !$index) }}
-                {{ Form::label($device->name) }}<br>
-            @endforeach
-            {{ Form::label('minTime') }}
-            {{ Form::number('minTime','', ['class' =>'form-control']) }}
-            {{ Form::label('Price for 1 minute') }}
-            {{ Form::text('value','', ['class' =>'form-control']) }}
+            {{ Form::open(['route' => 'devices.store']) }}
+            {{ Form::label('Device name') }}
+            {{ Form::text('name','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
-
             {{ Form::close() }}
         </div>
     </div>
@@ -26,4 +19,5 @@
             </ul>
         </div>
     @endif
+
 @endsection

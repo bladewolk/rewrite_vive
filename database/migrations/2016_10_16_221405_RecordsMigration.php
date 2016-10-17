@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DevicesMigration extends Migration
+class RecordsMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class DevicesMigration extends Migration
      */
     public function up()
     {
-        Schema::create('devices', function (Blueprint $table) {
+        Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
-            //$table->integer('device_id')->unique();
-            $table->string('name');
+            $table->integer('event_id');
+            $table->string('status'); //edited of canceled
+            $table->string('user_id');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class DevicesMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('devices');
+        Schema::dropIfExists('records');
     }
 }

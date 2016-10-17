@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+use App\Models\Record;
 
 class EventsController extends Controller
 {
@@ -65,7 +67,9 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('events.edit', [
+            'event' => Event::find($id)
+        ]);
     }
 
     /**
@@ -77,7 +81,26 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::find($id);
+        $new_price = DB::table('prices')
+            ->where('device_id', '=', $event->device_id)
+            ->where('minTime', '<=', $event->duration + $request->duration)
+            ->orderBy('created_at', 'desc')
+            ->orderBy('minTime', 'desc')
+            ->first();
+        $new_price = ceil($new_price->value * ($event->duration + $request->duration));
+
+        $event->update([
+            'duration' => $event->duration + $request->duration,
+            'total_price' => $new_price
+        ]);
+
+        $record = new Record($request->all());
+        $record->event_id = $id;
+        $record->user_id = Auth::user()->id;
+        $record->status = 'Edited';
+        $record->save();
+        return redirect()->route('home');
     }
 
     /**

@@ -3,17 +3,13 @@
 @section('content')
     <div class="container">
         <div class="form-group">
-            {{ Form::open(['route' => 'prices.store']) }}
-            @foreach($devices as $index => $device)
-                {{ Form::radio('device_id', $device->id, !$index) }}
-                {{ Form::label($device->name) }}<br>
-            @endforeach
-            {{ Form::label('minTime') }}
-            {{ Form::number('minTime','', ['class' =>'form-control']) }}
-            {{ Form::label('Price for 1 minute') }}
-            {{ Form::text('value','', ['class' =>'form-control']) }}
+            {{ Form::model($event, ['method'=>'PATCH', 'route' =>['events.update', $event->id]]) }}
+            {{ Form::label('New Duration (Will be added to current time)') }}
+            {{ Form::label($event->duration) }}
+            {{ Form::number('duration','', ['class' =>'form-control']) }}
+            {{ Form::label('Description') }}
+            {{ Form::textarea('description','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
-
             {{ Form::close() }}
         </div>
     </div>
