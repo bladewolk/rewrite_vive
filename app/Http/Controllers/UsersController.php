@@ -38,8 +38,11 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $input = $request->all();
-        User::create($input);
+        $newUser = new User();
+        $newUser->name = $request->name;
+        $newUser->username = $request->username;
+        $newUser->password = bcrypt($request->password);
+        $newUser->save();
         return redirect()->route('users.index');
     }
 
@@ -88,6 +91,6 @@ class UsersController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->action('AdminUsersControllerRes@index');
+        return redirect()->route('users.index');
     }
 }

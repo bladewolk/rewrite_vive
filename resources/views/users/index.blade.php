@@ -14,7 +14,7 @@
                             <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
 
                             {{ Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete', 'style' => 'display: inline-block']) }}
-                            <button class="btn btn-danger" type="submit" >Delete</button>
+                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                             {{ Form::close() }}
                         </div>
                     </div>
