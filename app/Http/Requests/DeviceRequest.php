@@ -24,7 +24,16 @@ class DeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:devices'
+            'name' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Enter Device Name'
+        ];
+    }
+
+
 }

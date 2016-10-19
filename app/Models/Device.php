@@ -30,8 +30,4 @@ class Device extends Model
         return $this->hasMany(Event::class);
     }
 
-    public function name()
-    {
-        return $this->name;
-    }
 }
