@@ -25,8 +25,8 @@ class PriceRequest extends FormRequest
     {
         return [
             'device_id' => 'required',
-            'minTime' => 'required',
-            'value' => 'required'
+            'minTime' => 'required|numeric|min:1',
+            'value' => 'required|numeric|min:1'
         ];
     }
 }
