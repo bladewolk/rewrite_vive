@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Device;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Device::deleting(function ($device) {
+            $device->price()->delete();
+        });
     }
 
     /**
