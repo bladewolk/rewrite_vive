@@ -26,6 +26,11 @@ class Event extends Model
         'total_price',
     ];
 
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
+
     public function device()
     {
         return $this->belongsTo(Device::class)->withTrashed();
@@ -36,12 +41,15 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function calculatePrice()
+    public function setDurationAttribute($value)
     {
-        return $this->device->price
-            ->where('minTime', '<=', $this->duration)
-            ->orderBy('minTime', 'desc')
-            ->first()
-            ->value * $this->duration;
+        $this->attributes['duration'] = $value;
+        $this->attributes['total_price'] = ceil(
+            $this->device->prices
+                ->where('minTime', '<=', $value)
+                ->sortByDesc('minTime')
+                ->first()
+                ->value * $value
+        );
     }
 }

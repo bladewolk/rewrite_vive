@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    @foreach($prices as $price)
-        <div class="container">
+    <div class="container">
+        <div class="row" style="margin-bottom: 22px">
+            <div class="col-md-8 col-md-offset-2">
+                <a class="btn btn-primary alert-link pull-right" href="{{ route('prices.create') }}">New
+                    Price</a>
+            </div>
+        </div>
+        @foreach($prices as $price)
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
@@ -20,8 +26,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
-    @endforeach
-    <a class="btn btn-primary alert-link pull-right" href="{{ route('prices.create') }}">New Price</a>
+        @endforeach
+    </div>
 @endsection

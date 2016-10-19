@@ -63,13 +63,14 @@ class PricesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Price $price
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Price $price)
     {
         return view('prices.edit', [
-            'price' => Price::find($id)
+            'price' => $price
         ]);
     }
 

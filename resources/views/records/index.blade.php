@@ -9,13 +9,11 @@
                         <div class="panel-body">
                             Event ID: {{ $event->event_id }} <br>
                             User ID: {{ $event->user_id }} <br>
-                            Status: {{ $event->status }} <br>
                             Description: {{ $event->description }} <br>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     @endforeach
     <div class="container">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ajaxPriceRequest;
+use App\Models\Record;
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\Event;
@@ -29,14 +30,14 @@ class HomeController extends Controller
     {
         return view('pages.index', [
             'devices' => Device::all(),
-            'events' => Event::latest()->paginate(4)
+            'events' => Event::with('records')->latest()->paginate(4)
         ]);
     }
 
     public function ajaxPrice(ajaxPriceRequest $request, Event $event)
     {
         $event->fill($request->all());
-        return ceil($event->calculatePrice());
+        return $event->calculatePrice();
     }
 
     public function ajaxCancel(Event $event)

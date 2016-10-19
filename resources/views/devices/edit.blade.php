@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="form-group">
-            {{ Form::model($device, ['method'=>'PATCH', 'route' =>['devices.update', $device->id]]) }}
+            {{ Form::model($device, ['method'=>'PUT', 'route' =>['devices.update', $device->id]]) }}
             {{ Form::label('Device name') }}
             {{ Form::text('name','', ['class' =>'form-control']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}

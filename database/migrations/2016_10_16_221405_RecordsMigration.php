@@ -16,8 +16,7 @@ class RecordsMigration extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id');
-            $table->string('status'); //edited of canceled
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();

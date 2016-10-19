@@ -24,8 +24,10 @@ class EditEventRequest extends FormRequest
      */
     public function rules(Request $request)
     {
+//        dd($request);
         return [
-            'duration' => 'required',
+            'duration' => 'bail|required|numeric',
+            'time' => 'min:1',
             'description' => 'required'
         ];
     }

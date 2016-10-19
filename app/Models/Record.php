@@ -17,7 +17,6 @@ class Record extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'status',
         'user_id',
         'description',
         'event_id'

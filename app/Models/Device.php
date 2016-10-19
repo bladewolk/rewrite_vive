@@ -20,9 +20,9 @@ class Device extends Model
         'name'
     ];
 
-    public function price()
+    public function prices()
     {
-        return $this->hasOne(Price::class);
+        return $this->hasMany(Price::class)->withTrashed();
     }
 
     public function event()

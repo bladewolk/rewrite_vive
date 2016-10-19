@@ -40,6 +40,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     public function isAdmin()
     {
         // this looks for an admin column in your users table

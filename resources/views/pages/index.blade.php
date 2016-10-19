@@ -39,11 +39,14 @@
                             </div>
                             <div class="pull-right">
                                 @if ($event->status == 'active')
-                                    @if ((\Carbon\Carbon::now()->diffInMinutes($event->created_at)) <= $event->duration)
+                                    @if ((\Carbon\Carbon::now()->diffInMinutes($event->updated_at)) <= $event->duration)
                                         <a class="btn btn-primary"
                                            href="{{ route('events.edit', ['id' => $event->id]) }}">Edit
                                         </a>
                                         <br> <h6> {{ $event->created_at }}</h6>
+                                        <h6> Played Time
+                                            {{ \Carbon\Carbon::now()->diffInMinutes($event->created_at) }}
+                                            min.</h6>
                                         <h6> Time
                                             remaining {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }}
                                             min.</h6>

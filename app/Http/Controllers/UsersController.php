@@ -38,11 +38,7 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $newUser = new User();
-        $newUser->name = $request->name;
-        $newUser->username = $request->username;
-        $newUser->password = bcrypt($request->password);
-        $newUser->save();
+        User::create($request->all());
         return redirect()->route('users.index');
     }
 

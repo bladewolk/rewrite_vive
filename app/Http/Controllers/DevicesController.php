@@ -76,7 +76,12 @@ class DevicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Device::findorFail($id)->update($request->all());
+        if ($request->action === 'Restore') {
+            Device::withTrashed()->find($id)->restore();
+        } else {
+            Device::find($id)->update($request->all());
+        }
+
         return redirect()->route('devices.index');
     }
 

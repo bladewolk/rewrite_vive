@@ -22,6 +22,7 @@ class Price extends Model
         'value',
     ];
 
+
     public function device()
     {
         return $this->belongsTo(Device::class);

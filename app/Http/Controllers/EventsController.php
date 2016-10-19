@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ajaxPriceRequest;
-use App\Http\Requests\EditEventRequest;
-use Illuminate\Contracts\Validation\Validator;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
-use Illuminate\Support\Facades\DB;
 use App\Models\Record;
+use Illuminate\Support\Facades\Validator;
 
 class EventsController extends Controller
 {
@@ -37,16 +36,14 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param Event $event
+     * @param ajaxPriceRequest|Request $request
      * @return \Illuminate\Http\Response
+     * @internal param Event $event
+     * @internal param Event $event
      */
-    public function store(ajaxPriceRequest $request, Event $event)
+    public function store(ajaxPriceRequest $request)
     {
-        $event->fill($request->all());
-        $event->user_id = Auth::user()->id;
-        $event->total_price = $event->calculatePrice();
-        $event->save();
+        Event::create($request->all());
         return redirect('/');
     }
 
@@ -64,13 +61,14 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Event $event
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
         return view('events.edit', [
-            'event' => Event::find($id)
+            'event' => $event
         ]);
     }
 
@@ -78,31 +76,29 @@ class EventsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param Event $event
+     * @param Record $record
+     * @return \Illuminate\Http\RedirectResponse
+     * @internal param int $id
      */
-    public function update(EditEventRequest $request, $id)
+    public function update(Request $request, Event $event, Record $record)
     {
-        $event = Event::find($id);
-        $new_price = DB::table('prices')
-            ->where('device_id', '=', $event->device_id)
-            ->where('minTime', '<=', $event->duration + $request->duration)
-            ->orderBy('created_at', 'desc')
-            ->orderBy('minTime', 'desc')
-            ->first();
-        $new_price = ceil($new_price->value * ($event->duration + $request->duration));
-
-        $event->update([
-            'duration' => $event->duration + $request->duration,
-            'total_price' => $new_price
+        $diff = Carbon::now()->diffInMinutes($event->updated_at);
+        $validator = Validator::make($request->all(), [
+            'duration' => 'required|numeric|min:' . ($diff + 1),
+            'description' => 'required'
         ]);
 
-        $record = new Record($request->all());
-        $record->event_id = $id;
-        $record->user_id = Auth::user()->id;
-        $record->status = 'Edited';
-        $record->save();
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $event->update($request->all());
+
         return redirect()->route('home');
+
     }
 
     /**
@@ -114,10 +110,5 @@ class EventsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function cancel($id)
-    {
-        return $id;
     }
 }
