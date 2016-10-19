@@ -80,7 +80,7 @@ class PricesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PriceUpdate $request, $id)
+    public function update(PriceRequest $request, $id)
     {
         Price::find($id)->update($request->all());
         return redirect()->route('prices.index');
