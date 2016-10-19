@@ -24,6 +24,7 @@ class ajaxPriceRequest extends FormRequest
     public function rules()
     {
         return [
+            'device_id' => 'required',
             'duration' => 'required|numeric|min:1'
         ];
     }

@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->integer('duration');
             $table->float('total_price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

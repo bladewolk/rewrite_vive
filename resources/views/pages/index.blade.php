@@ -33,13 +33,12 @@
                         <div class="panel-body">
                             <div class="visible-lg-inline-block pull-left">
                                 Name: {{ $event->user->name }} <br>
-                                Device: {{ $event->device->name }} <br>
+                                Device: {{ $event->device()->withTrashed()->get()->first()->name}}<br>
                                 Duration: {{ $event->duration }} <br>
                                 Price: {{ $event->total_price }}
                             </div>
                             <div class="pull-right">
                                 @if ($event->status == 'active')
-
                                     @if ((\Carbon\Carbon::now()->diffInMinutes($event->created_at)) <= $event->duration)
                                         <a class="btn btn-primary"
                                            href="{{ route('events.edit', ['id' => $event->id]) }}">Edit
@@ -69,27 +68,6 @@
                 </div>
             </div>
         </div>
-        <div class="container" id="hiddenEdit{{$event->id}}" style="display: none">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="visible-lg-inline-block pull-left">
-                                Name: {{ $event->user->name }} <br>
-                                Device: {{ $event->name }} <br>
-                                Duration: {{ $event->duration }} <br>
-                                Price: {{ $event->total_price }}
-                            </div>
-                            <div class="pull-right">
-                                <button class="btn btn-primary">Update</button>
-                                Edit form
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     @endforeach
     <div class="container">
         <div class="row">

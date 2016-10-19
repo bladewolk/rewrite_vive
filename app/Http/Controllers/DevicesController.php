@@ -17,7 +17,7 @@ class DevicesController extends Controller
     {
 
         return view('devices.index', [
-            'devices' => Device::all()
+            'devices' => Device::withTrashed()->get()
         ]);
     }
 

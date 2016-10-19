@@ -18,6 +18,7 @@ class DevicesMigration extends Migration
             //$table->integer('device_id')->unique();
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         return view('pages.index', [
             'devices' => Device::all(),
-            'events' => Event::latest()->paginate(4)
+            'events' => Event::withTrashed()->latest()->paginate(4)
         ]);
     }
 

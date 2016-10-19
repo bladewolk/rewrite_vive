@@ -20,6 +20,7 @@ class RecordsMigration extends Migration
             $table->string('user_id');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreatePricesTable extends Migration
             $table->integer('minTime');
             $table->float('value');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

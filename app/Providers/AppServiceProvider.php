@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Device::deleting(function ($device) {
             $device->price()->delete();
+            $device->event()->delete();
         });
     }
 
