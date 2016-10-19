@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ajaxPriceRequest;
 use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\Event;
@@ -32,7 +33,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function ajaxPrice(Request $request)
+    public function ajaxPrice(ajaxPriceRequest $request)
     {
         $price = DB::table('prices')
             ->where('device_id', '=', $request->device_id)

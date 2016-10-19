@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ajaxPriceRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
@@ -38,13 +39,12 @@ class EventsController extends Controller
      * @param Event $event
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Event $event)
+    public function store(ajaxPriceRequest $request, Event $event)
     {
         $event->fill($request->all());
         $event->user_id = Auth::user()->id;
         $event->total_price = $event->calculatePrice();
         $event->save();
-
         return redirect('/');
     }
 
