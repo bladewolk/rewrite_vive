@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PriceRequest extends FormRequest
+class DeviceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class PriceRequest extends FormRequest
     public function rules()
     {
         return [
-            'device_id' => 'required',
-            'minTime' => 'required',
-            'value' => 'required'
+            'name' => 'required|unique:devices'
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeviceRequest;
 use Illuminate\Http\Request;
 use App\Models\Device;
 
@@ -12,8 +13,9 @@ class DevicesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Device $device)
     {
+
         return view('devices.index', [
             'devices' => Device::all()
         ]);
@@ -35,9 +37,9 @@ class DevicesController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DeviceRequest $request, Device $device)
     {
-        Device::create($request->all());
+        $device->fill($request->all())->save();
         return redirect()->route('devices.index');
     }
 
