@@ -33,7 +33,7 @@ class PriceRequest extends FormRequest
         return [
             'device_id' => 'sometimes|required',
 //            'minTime' => 'required|numeric|min:1|unique:prices,minTime,3',// . Route::input('price'),
-
+            'minTime' => 'unique:prices,minTime' . Route::input('price'),
             'value' => 'required|numeric|min:1'
         ];
     }

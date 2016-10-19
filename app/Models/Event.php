@@ -40,7 +40,6 @@ class Event extends Model
     {
         return $this->device->price
             ->where('minTime', '<=', $this->duration)
-            ->orderBy('created_at', 'desc')
             ->orderBy('minTime', 'desc')
             ->first()
             ->value * $this->duration;
