@@ -10,6 +10,12 @@
                             Device: {{ $price->device->name }} <br>
                             Min Time: {{ $price->minTime }} <br>
                             Price: {{ $price->value }} <br>
+                            <a class="btn btn-default" href="{{ route('prices.edit', ['id' => $price->id]) }}">Edit</a>
+
+                            {{ Form::open(['route' => ['prices.destroy', $price->id], 'method' => 'delete']) }}
+                            {{ Form::submit('Delete', ['class'=>'btn btn-danger']) }}
+                            {{ Form::close() }}
+
                         </div>
                     </div>
                 </div>

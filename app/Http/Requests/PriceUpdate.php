@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ajaxPriceRequest extends FormRequest
+class PriceUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class ajaxPriceRequest extends FormRequest
     public function rules()
     {
         return [
-            'duration' => 'required|numeric|min:1'
+            'minTime' => 'required|numeric|min:1',
+            'value' => 'required|numeric|min:1'
         ];
     }
 }

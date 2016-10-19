@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PriceUpdate;
 use App\Models\Price;
 use Illuminate\Http\Request;
 use App\Http\Requests\PriceRequest;
@@ -67,7 +68,9 @@ class PricesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('prices.edit', [
+            'price' => Price::find($id)
+        ]);
     }
 
     /**
@@ -77,9 +80,10 @@ class PricesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PriceUpdate $request, $id)
     {
-        //
+        Price::find($id)->update($request->all());
+        return redirect()->route('prices.index');
     }
 
     /**
@@ -90,6 +94,7 @@ class PricesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Price::find($id)->delete();
+        return redirect()->route('prices.index');
     }
 }
