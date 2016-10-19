@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ajaxPriceRequest;
+use App\Http\Requests\EditEventRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
@@ -79,52 +81,26 @@ class EventsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditEventRequest $request, $id)
     {
-        // if edit mode
-        if ($request->mode == 'edit') {
-            $event = Event::find($id);
-            $new_price = DB::table('prices')
-                ->where('device_id', '=', $event->device_id)
-                ->where('minTime', '<=', $event->duration + $request->duration)
-                ->orderBy('created_at', 'desc')
-                ->orderBy('minTime', 'desc')
-                ->first();
-            $new_price = ceil($new_price->value * ($event->duration + $request->duration));
-
-            $event->update([
-                'duration' => $event->duration + $request->duration,
-                'total_price' => $new_price
-            ]);
-
-            $record = new Record($request->all());
-            $record->event_id = $id;
-            $record->user_id = Auth::user()->id;
-            $record->status = 'Edited';
-            $record->save();
-            return redirect()->route('home');
-        }
-        // if cancel mode
-
         $event = Event::find($id);
         $new_price = DB::table('prices')
             ->where('device_id', '=', $event->device_id)
-            ->where('minTime', '<=', \Carbon\Carbon::now()->diffInMinutes($event->created_at))
+            ->where('minTime', '<=', $event->duration + $request->duration)
             ->orderBy('created_at', 'desc')
             ->orderBy('minTime', 'desc')
             ->first();
-        $new_price = ceil($new_price->value * \Carbon\Carbon::now()->diffInMinutes($event->created_at));
+        $new_price = ceil($new_price->value * ($event->duration + $request->duration));
 
         $event->update([
-            'duration' => \Carbon\Carbon::now()->diffInMinutes($event->created_at),
-            'total_price' => $new_price,
-            'status' => 'canceled'
+            'duration' => $event->duration + $request->duration,
+            'total_price' => $new_price
         ]);
 
         $record = new Record($request->all());
         $record->event_id = $id;
         $record->user_id = Auth::user()->id;
-        $record->status = 'Canceled';
+        $record->status = 'Edited';
         $record->save();
         return redirect()->route('home');
     }
