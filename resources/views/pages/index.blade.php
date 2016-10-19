@@ -33,7 +33,7 @@
                         <div class="panel-body">
                             <div class="visible-lg-inline-block pull-left">
                                 Name: {{ $event->user->name }} <br>
-                                Device: {{ $event->device()->withTrashed()->get()->first()->name}}<br>
+                                Device: {{ $event->device->name}}<br>
                                 Duration: {{ $event->duration }} <br>
                                 Price: {{ $event->total_price }}
                             </div>

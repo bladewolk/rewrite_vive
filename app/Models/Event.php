@@ -28,7 +28,7 @@ class Event extends Model
 
     public function device()
     {
-        return $this->belongsTo(Device::class);
+        return $this->belongsTo(Device::class)->withTrashed();
     }
 
     public function user()
