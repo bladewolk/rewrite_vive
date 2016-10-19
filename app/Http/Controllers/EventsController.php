@@ -83,10 +83,10 @@ class EventsController extends Controller
      */
     public function update(Request $request, Event $event, Record $record)
     {
-        $diff = Carbon::now()->diffInMinutes($event->updated_at);
+        $diff = Carbon::now()->diffInMinutes($event->created_at);
         $validator = Validator::make($request->all(), [
             'duration' => 'required|numeric|min:' . ($diff + 1),
-            'description' => 'required'
+            'description' => 'sometimes|required'
         ]);
 
         if ($validator->fails()) {

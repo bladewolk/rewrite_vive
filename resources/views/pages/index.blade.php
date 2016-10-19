@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel-body form-group">
                             {{ Form::open(['route' => 'events.store']) }}
                             @foreach($devices as $index => $device)
                                 {{ Form::radio('device_id', $device->id , !$index) }}
@@ -14,7 +14,14 @@
                             @endforeach
                             <br>
                             {{ Form::label('email', 'Duration') }}
-                            {{ Form::text('duration', '10', ['id' => 'ajaxPriceCalculate', 'min' => '0', 'max' => '240', 'autocomplete' => 'off']) }}
+                            {{ Form::text('duration', '10', [
+                                    'id' => 'ajaxPriceCalculate',
+                                    'min' => '0',
+                                    'max' => '240',
+                                    'autocomplete' => 'off',
+                                    'class' => 'form-control'
+                                ])
+                            }}
                             <button class="btn btn-success">Add</button>
                             <br>
                             {{ Form::label('calculate', ' ', ['id' => 'calculated']) }}
@@ -39,7 +46,7 @@
                             </div>
                             <div class="pull-right">
                                 @if ($event->status == 'active')
-                                    @if ((\Carbon\Carbon::now()->diffInMinutes($event->updated_at)) <= $event->duration)
+                                    @if ((\Carbon\Carbon::now()->diffInMinutes($event->created_at)) <= $event->duration)
                                         <a class="btn btn-primary"
                                            href="{{ route('events.edit', ['id' => $event->id]) }}">Edit
                                         </a>
@@ -48,7 +55,8 @@
                                             {{ \Carbon\Carbon::now()->diffInMinutes($event->created_at) }}
                                             min.</h6>
                                         <h6> Time
-                                            remaining {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }}
+                                            remaining
+                                            {{ $event->duration - (\Carbon\Carbon::now()->diffInMinutes($event->created_at)) }}
                                             min.</h6>
                                     @else
 
