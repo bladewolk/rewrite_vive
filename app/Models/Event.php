@@ -38,6 +38,11 @@ class Event extends Model
 
     public function calculatePrice()
     {
-        return ceil($this->device->price->value * $this->duration);
+        return $this->device->price
+            ->where('minTime', '<=', $this->duration)
+            ->orderBy('created_at', 'desc')
+            ->orderBy('minTime', 'desc')
+            ->first()
+            ->value * $this->duration;
     }
 }

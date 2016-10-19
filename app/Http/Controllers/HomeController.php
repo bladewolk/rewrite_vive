@@ -33,15 +33,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function ajaxPrice(ajaxPriceRequest $request)
+    public function ajaxPrice(ajaxPriceRequest $request, Event $event)
     {
-        $price = DB::table('prices')
-            ->where('device_id', '=', $request->device_id)
-            ->where('minTime', '<=', $request->duration)
-            ->orderBy('created_at', 'desc')
-            ->orderBy('minTime', 'desc')
-            ->first();
-        return ceil($price->value * $request->duration);
+        $event->fill($request->all());
+        return ceil($event->calculatePrice());
     }
 
     public function ajaxCancel(Event $event)
