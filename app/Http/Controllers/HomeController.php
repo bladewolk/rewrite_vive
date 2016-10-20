@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ajaxPriceRequest;
+use App\Http\Requests\AjaxPriceRequest;
 use App\Models\Device;
 use App\Models\Event;
 
@@ -30,7 +30,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function ajaxPrice(ajaxPriceRequest $request, Event $event)
+    public function ajaxPrice(AjaxPriceRequest $request, Event $event)
     {
         return $event->fill($request->all())->total_price;
     }

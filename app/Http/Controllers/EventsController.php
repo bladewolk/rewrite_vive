@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ajaxPriceRequest;
+use App\Http\Requests\AjaxPriceRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Event;
@@ -34,12 +34,12 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ajaxPriceRequest|Request $request
+     * @param AjaxPriceRequest|Request $request
      * @return \Illuminate\Http\Response
      * @internal param Event $event
      * @internal param Event $event
      */
-    public function store(ajaxPriceRequest $request)
+    public function store(AjaxPriceRequest $request)
     {
         Event::create($request->all());
         return redirect('/');
