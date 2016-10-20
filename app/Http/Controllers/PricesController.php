@@ -39,12 +39,12 @@ class PricesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param PriceRequest|Request $request
-     * @param Price $price
      * @return \Illuminate\Http\Response
+     * @internal param Price $price
      */
-    public function store(PriceRequest $request, Price $price)
+    public function store(PriceRequest $request)
     {
-        $price->fill($request->all())->save();
+        Price::create($request->all());
         return redirect()->route('prices.index');
 
     }
@@ -77,25 +77,27 @@ class PricesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param PriceRequest|Request $request
+     * @param Price $price
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(PriceRequest $request, $id)
+    public function update(PriceRequest $request, Price $price)
     {
-        Price::find($id)->update($request->all());
+        $price->update($request->all());
         return redirect()->route('prices.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Price $price
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Price $price)
     {
-        Price::find($id)->delete();
+        $price->delete();
         return redirect()->route('prices.index');
     }
 }
