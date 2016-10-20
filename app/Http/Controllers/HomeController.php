@@ -3,18 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ajaxPriceRequest;
-use App\Models\Record;
-use Illuminate\Http\Request;
 use App\Models\Device;
 use App\Models\Event;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
