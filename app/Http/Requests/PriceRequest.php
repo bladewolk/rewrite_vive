@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Price;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
 
@@ -23,17 +20,20 @@ class PriceRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @param Request $request
      * @return array
+     * @internal param Request $request
      */
-    public function rules(Request $request)
+    public function rules()
     {
-        // TODO research rule ignore
         return [
             'device_id' => 'sometimes|required',
-//            'minTime' => 'required|numeric|min:1|unique:prices,minTime,3',// . Route::input('price'),
-            'minTime' => 'unique:prices,minTime' . Route::input('price'),
+            // Both variants are correct and working
+//            'minTime' => 'required|unique:prices,minTime,' . Route::input('price'),
+            'minTime' => [
+                'required',
+                Rule::unique('prices')
+                    ->ignore(Route::input('price')),
+            ],
             'value' => 'required|numeric|min:1'
         ];
     }
