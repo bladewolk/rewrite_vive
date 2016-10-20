@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Record;
 use App\Http\Requests;
 
+// TODO: do we actually need this controller?
 class RecordsController extends Controller
 {
     /**
