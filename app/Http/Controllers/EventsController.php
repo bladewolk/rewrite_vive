@@ -77,12 +77,13 @@ class EventsController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param Event $event
-     * @param Record $record
      * @return \Illuminate\Http\RedirectResponse
+     * @internal param Record $record
      * @internal param int $id
      */
-    public function update(Request $request, Event $event, Record $record)
+    public function update(Request $request, Event $event)
     {
+        // TODO: make validation based on seconds (?)
         $diff = Carbon::now()->diffInMinutes($event->created_at);
         $validator = Validator::make($request->all(), [
             'duration' => 'required|numeric|min:' . ($diff + 1),
