@@ -13,7 +13,7 @@ class DevicesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Device $device)
+    public function index()
     {
 
         return view('devices.index', [
@@ -57,13 +57,14 @@ class DevicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Device $device
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Device $device)
     {
         return view('devices.edit', [
-            'device' => Device::findOrFail($id)
+            'device' => $device
         ]);
     }
 
@@ -88,12 +89,13 @@ class DevicesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Device $device
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Device $device)
     {
-        Device::find($id)->delete();
+        $device->delete();
         return redirect()->route('devices.index');
     }
 }
