@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PriceUpdate;
 use App\Models\Price;
 use Illuminate\Http\Request;
 use App\Http\Requests\PriceRequest;
