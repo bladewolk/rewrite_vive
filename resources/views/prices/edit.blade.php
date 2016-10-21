@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container col-md-3 col-md-offset-5">
-        <div class="form-group">
+    <div class="container">
+        <div class="form-group col-md-3 col-md-offset-5">
             {{ Form::model($price, ['method'=>'PATCH', 'route' =>['prices.update', $price->id]]) }}
             {{ Form::label('minTime') }}
             {{ Form::number('minTime',$price->minTime, ['class' =>'form-control', 'autocomplete' => 'off']) }}
