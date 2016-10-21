@@ -22,7 +22,7 @@
                                 {{ Form::submit('Delete', ['class'=>'btn btn-danger']) }}
                                 {{ Form::close() }}
                             @else
-                                {{ Form::model($device, ['method'=>'PUT', 'route' =>['devices.update', $device->id]]) }}
+                                {{ Form::model($device, ['method'=>'PUT', 'route' =>['devices.update', $device->id], 'style' => 'text-align:right']) }}
                                 {{ Form::submit('Restore', ['class' => 'btn btn-info', 'name' => 'action']) }}
                                 {{ Form::close() }}
                             @endif
