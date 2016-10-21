@@ -75,7 +75,7 @@ class DevicesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DeviceRequest $request, $id)
     {
         if ($request->action === 'Restore') {
             Device::withTrashed()->find($id)->restore();

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
 
 class DeviceRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class DeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:devices'
+            'name' => 'required|unique:devices,name,' . Route::input('device')
         ];
     }
 
