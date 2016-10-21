@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="form-group">
+        <div class="form-group col-md-3 col-md-offset-5">
             {{ Form::open(['route' => ['users.store']]) }}
             <label for="comment">Name:</label>
             {{ Form::text('name','', ['class' =>'form-control']) }}

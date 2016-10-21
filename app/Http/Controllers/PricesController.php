@@ -18,7 +18,7 @@ class PricesController extends Controller
     {
 
         return view('prices.index', [
-            'prices' => Price::all()
+            'prices' => Price::withTrashed()->get()
         ]);
     }
 
@@ -77,13 +77,18 @@ class PricesController extends Controller
      * Update the specified resource in storage.
      *
      * @param PriceRequest|Request $request
-     * @param Price $price
      * @return \Illuminate\Http\Response
+     * @internal param Price $price
      * @internal param int $id
      */
-    public function update(PriceRequest $request, Price $price)
+    public function update(PriceRequest $request, $id)
     {
-        $price->update($request->all());
+        if ($request->action === 'Restore') {
+            Price::withTrashed()->find($id)->restore();
+        } else {
+            Price::find($id)->update($request->all());
+        }
+
         return redirect()->route('prices.index');
     }
 

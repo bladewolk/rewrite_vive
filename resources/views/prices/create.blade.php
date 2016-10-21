@@ -9,7 +9,7 @@
                 {{ Form::label($device->name) }}<br>
             @endforeach
             {{ Form::label('minTime') }}
-            {{ Form::number('minTime','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
+            {{ Form::text('minTime','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
             {{ Form::label('Price for 1 minute') }}
             {{ Form::text('value','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}

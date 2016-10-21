@@ -3,6 +3,12 @@
 @section('content')
     @foreach($users as $user)
     <div class="container">
+        <div class="row" style="margin-bottom: 22px">
+            <div class="col-md-8 col-md-offset-2">
+                <a class="btn btn-primary alert-link pull-right" href="{{ route('users.create') }}">Add new</a>
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -23,5 +29,4 @@
         </div>
     </div>
     @endforeach
-    <a class="btn btn-primary alert-link pull-right" href="{{ route('users.create') }}">Add new</a>
 @endsection

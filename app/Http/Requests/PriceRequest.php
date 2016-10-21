@@ -30,11 +30,12 @@ class PriceRequest extends FormRequest
             // Both variants are correct and working
 //            'minTime' => 'required|unique:prices,minTime,' . Route::input('price'),
             'minTime' => [
+                'sometimes',
                 'required',
                 Rule::unique('prices')
                     ->ignore(Route::input('price')),
             ],
-            'value' => 'required|numeric|min:1'
+            'value' => 'sometimes|required|numeric|min:1'
         ];
     }
 }
