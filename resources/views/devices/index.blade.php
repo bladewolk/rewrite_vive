@@ -4,8 +4,7 @@
     <div class="container">
         <div class="row" style="margin-bottom: 22px">
             <div class="col-md-8 col-md-offset-2">
-                <a class="btn btn-primary alert-link pull-right" href="{{ route('devices.create') }}">New
-                    Device</a>
+                <a href="{{ route('devices.create') }}" class="btn btn-primary alert-link pull-right">New</a>
             </div>
         </div>
         @foreach($devices as $device)

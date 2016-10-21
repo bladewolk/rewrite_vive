@@ -16,8 +16,26 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'username' => $faker->unique()->userName,
+        'password' => 'secret',
+        'isAdmin' => true,
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Models\Device::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->name,
+    ];
+});
+
+$factory->define(App\Models\Price::class, function ($faker) {
+    return [
+        'minTime' => $faker->randomDigit,
+        'value' => $faker->randomDigit,
+        'device_id' => function () {
+            return factory(App\Models\Device::class)->create()->id;
+        }
     ];
 });
