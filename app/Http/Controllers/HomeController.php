@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AjaxPriceRequest;
 use App\Models\Device;
 use App\Models\Event;
+use App\Models\Record;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,7 @@ class HomeController extends Controller
     {
         return view('pages.index', [
             'devices' => Device::all(),
-            'events' => Event::with('records')->latest()->paginate(4)
+            'events' => Event::with('records')->latest()->paginate(4),
         ]);
     }
 
@@ -40,6 +41,11 @@ class HomeController extends Controller
         $event->update([
             'status' => Event::STATUS_CANCELED
         ]);
+    }
+
+    public function showEdits($id)
+    {
+        return $id;
     }
 
 }

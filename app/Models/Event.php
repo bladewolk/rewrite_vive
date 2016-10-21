@@ -44,12 +44,11 @@ class Event extends Model
     public function setDurationAttribute($value)
     {
         $this->attributes['duration'] = $value;
-        $this->attributes['total_price'] = ceil(
-            $this->device->prices
+        $this->attributes['total_price'] = $value
+            * $this->device->prices
                 ->where('minTime', '<=', $value)
                 ->sortByDesc('minTime')
                 ->first()
-                ->value * $value
-        );
+                ->value;
     }
 }

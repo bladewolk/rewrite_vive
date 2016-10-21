@@ -6,9 +6,9 @@
             {{ Form::model($event, ['method'=>'PATCH', 'route' =>['events.update', $event->id]]) }}
             {{ Form::label('New Duration (Will be added to current time)') }}
             {{ Form::label($event->duration) }}
-            {{ Form::number('duration','', ['class' =>'form-control']) }}
+            {{ Form::number('duration','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
             {{ Form::label('Description') }}
-            {{ Form::textarea('description','', ['class' =>'form-control']) }}
+            {{ Form::textarea('description','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
             {{ Form::submit('Update', ['class' => 'btn btn-primary']) }}
             {{ Form::close() }}
         </div>

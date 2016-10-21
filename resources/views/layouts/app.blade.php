@@ -90,7 +90,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('records.index') }}" class="dropdown-toggle" role="button" aria-expanded="false">
+                                    <a href="{{ route('records.index') }}" class="dropdown-toggle" role="button"
+                                       aria-expanded="false">
                                         Records
                                     </a>
                                 </li>
@@ -127,40 +128,10 @@
     $('#ajaxPriceCalculate').on('change keyup', calculate);
     $('input[name=device_id]').change(calculate);
 
-    $('.cancel-button').click(function () {
-        var $this = $(this);
-        var id = $this.data('id');
-
-        $.ajax({
-            type: 'POST',
-            url: '/ajaxCancel/' + id,
-            data: {
-                description: $('textarea[name=description]').val(),
-                _token: CSRF_TOKEN
-            }
-        }).done(function () {
-            $this.hide('fast', function () {
-                // TODO: refactor this
-                $('#' + id).show('fast');
-            })
-        });
-    });
-
-    $('.cancel-event').click(function () {
-        var id = $(this).data('id');
-
-        $('#' + id).hide('fast', function () {
-            $('#hiddenCancel' + id).show('fast');
-        })
-    });
-
-    function editEvent(id) {
-        $('#' + id).hide("fast", function () {
-            $('#hiddenEdit' + id).show("fast", function () {
-
-            });
-        });
+    function showEdits(id) {
+        $('.records[data-event-id=' + id + ']').toggle();
     }
+
 
 </script>
 <script src="/js/app.js"></script>

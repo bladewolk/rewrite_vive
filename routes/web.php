@@ -21,7 +21,6 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::post('/ajaxPrice', 'HomeController@ajaxPrice');
-    Route::post('/ajaxCancel', 'HomeController@ajaxCancel');
 
     Route::resource('/events', 'EventsController');
     Route::get('/cancel/{id}', 'EventsController@cancel')->name('cancel');
