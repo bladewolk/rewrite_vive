@@ -25,7 +25,7 @@ class DeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:devices,name,' . Route::input('device')
+            'name' => 'sometimes|required|unique:devices,name,' . Route::input('device')
         ];
     }
 
