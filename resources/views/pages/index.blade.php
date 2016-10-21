@@ -4,8 +4,7 @@
     @if(Auth::user())
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
+                <div class="col-md-2 col-md-offset-5">
                         <div class="panel-body form-group">
                             {{ Form::open(['route' => 'events.store']) }}
                             @foreach($devices as $index => $device)
@@ -45,14 +44,13 @@
                                 Price: {{ $event->total_price }}
                             </div>
                             <div class="pull-right">
-                                @if ($event->status == 'active')
                                     @if ((\Carbon\Carbon::now()->diffInMinutes($event->created_at)) <= $event->duration)
                                         <a class="btn btn-primary"
                                            href="{{ route('events.edit', ['id' => $event->id]) }}">Edit
                                         </a>
                                         <br> <h6> {{ $event->created_at }}</h6>
                                         <h6> Played Time
-                                            {{ \Carbon\Carbon::now()->diffInMinutes($event->created_at) }}
+                                            {{  \Carbon\Carbon::now()->diffInMinutes($event->created_at) }}
                                             min.</h6>
                                         <h6> Time
                                             remaining
@@ -64,15 +62,6 @@
                                         <h6> {{ $event->created_at }} </h6>
 
                                     @endif
-
-
-                                @else
-
-                                    <br><h4> Canceled by user </h4>
-                                    <h6> {{ $event->created_at }} </h6>
-
-                                @endif
-
                             </div>
                         </div>
                     </div>
