@@ -62,7 +62,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         // TODO: rename edituser users.edit
-        return view('users.edituser', [
+        return view('users.edit', [
             'user' => $user
         ]);
     }

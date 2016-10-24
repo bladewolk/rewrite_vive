@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="container">
-        <div class="form-group">
+        <div class="form-group col-xs-5 col-xs-offset-4">
             {{ Form::model($user, ['method'=>'PATCH', 'route' =>['users.update', $user->id]]) }}
             <label for="comment">Name: </label>
-            {{ Form::text('name','', ['class' =>'form-control', 'placeholder' => $user->name]) }}
+            {{ Form::text('name', $user->name, ['class' =>'form-control']) }}
             <label for="comment">Username:</label>
-            {{ Form::text('username','', ['class' =>'form-control', 'placeholder' => $user->username]) }}
+            {{ Form::text('username', $user->username, ['class' =>'form-control']) }}
             <label for="comment">Password:</label>
             {{ Form::text('password','', ['class' =>'form-control', 'placeholder' => 'enter new password']) }}
             {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}

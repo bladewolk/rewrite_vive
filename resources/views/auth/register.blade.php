@@ -5,11 +5,11 @@
         <div class="form-group col-md-3 col-md-offset-5">
             {{ Form::open(['route' => ['users.store']]) }}
             <label for="comment">Name:</label>
-            {{ Form::text('name','', ['class' =>'form-control']) }}
+            {{ Form::text('name','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
             <label for="comment">Username:</label>
-            {{ Form::text('username','', ['class' =>'form-control']) }}
+            {{ Form::text('username','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
             <label for="comment">Password:</label>
-            {{ Form::text('password','', ['class' =>'form-control']) }}
+            {{ Form::text('password','', ['class' =>'form-control', 'autocomplete' => 'off']) }}
             {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
 
             {{ Form::close() }}
