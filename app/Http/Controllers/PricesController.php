@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PriceCreate;
+use App\Http\Requests\PriceUpdate;
 use App\Models\Price;
 use Illuminate\Http\Request;
-use App\Http\Requests\PriceRequest;
 use App\Models\Device;
 
 class PricesController extends Controller
@@ -37,15 +38,14 @@ class PricesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param PriceRequest|Request $request
+     * @param PriceCreate $request
      * @return \Illuminate\Http\Response
      * @internal param Price $price
      */
-    public function store(PriceRequest $request)
+    public function store(PriceCreate $request)
     {
         Price::create($request->all());
         return redirect()->route('prices.index');
-
     }
 
     /**
@@ -76,12 +76,13 @@ class PricesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param PriceRequest|Request $request
+     * @param PriceUpdate $request
+     * @param $id
      * @return \Illuminate\Http\Response
      * @internal param Price $price
      * @internal param int $id
      */
-    public function update(PriceRequest $request, $id)
+    public function update(PriceUpdate $request, $id)
     {
         if ($request->action === 'Restore') {
             Price::withTrashed()->find($id)->restore();

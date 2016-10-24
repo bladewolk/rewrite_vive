@@ -48,6 +48,7 @@ class Event extends Model
             * $this->device->prices
                 ->where('minTime', '<=', $value)
                 ->sortByDesc('minTime')
+                ->sortByDesc('updated_at')
                 ->first()
                 ->value;
     }

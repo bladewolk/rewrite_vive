@@ -12,8 +12,8 @@ class CreateTest extends TestCase
      *
      * @return void
      */
-//    use DatabaseMigrations;
-//    use DatabaseTransactions;
+    use DatabaseMigrations;
+    use DatabaseTransactions;
     public $price = 1.7;
     public $duration = 12;
     public $user;
