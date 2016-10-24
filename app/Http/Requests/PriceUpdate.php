@@ -24,8 +24,8 @@ class PriceUpdate extends FormRequest
     public function rules()
     {
         return [
-            'minTime' => 'required|numeric|min:1',
-            'value' => 'required|numeric|min:1'
+            'minTime' => 'sometimes|required|numeric|min:1',
+            'value' => 'sometimes|required|numeric|min:1'
         ];
     }
 }

@@ -16,7 +16,7 @@
                             Device: {{ $price->device->name }} <br>
                             Min Time: {{ $price->minTime }} <br>
                             Price: {{ $price->value }} <br>
-                            @if ($price->exists())
+                            @if (!$price->deleted_at)
 
                                 {{ Form::open(['route' => ['prices.destroy', $price->id], 'method' => 'delete', 'style' => 'text-align:right'])  }}
                                 <a class="btn btn-primary"
