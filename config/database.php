@@ -1,7 +1,7 @@
 <?php
 
 //need this if you add clearDB on Heroku
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$url = parse_url(env("CLEARDB_DATABASE_URL"));
 $host = $url["host"];
 $database = substr($url["path"], 1);
 $username = $url["user"];
