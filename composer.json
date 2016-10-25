@@ -48,7 +48,7 @@
       "php artisan optimize",
       "php artisan migrate",
       "chmod -R 777 storage",
-      "chmod -R 777 bootstrap"
+      "chmod -R 777 bootsrap"
     ],
     "post-update-cmd": [
       "Illuminate\\Foundation\\ComposerScripts::postUpdate",
