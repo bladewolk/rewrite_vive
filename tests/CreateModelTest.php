@@ -11,8 +11,8 @@ class CreateModelTest extends TestCase
      *
      * @return void
      */
-    use DatabaseMigrations;
-    use DatabaseTransactions;
+//    use DatabaseMigrations;
+//    use DatabaseTransactions;
     public $device;
     public $price;
     public $event;
@@ -70,9 +70,9 @@ class CreateModelTest extends TestCase
 
     public function testExample()
     {
-        $this->createUser();
-        $this->createDevice();
-        $this->createPrice();
+//        $this->createUser();
+//        $this->createDevice();
+//        $this->createPrice();
 //        TODO App\Models\Price could not be converted to int
 //        $this->createEvent();
     }

@@ -78,7 +78,7 @@ class UsersController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $user->update($request->all());
-        return redirect()->route('admin.index');
+        return redirect()->route('users.index');
     }
 
     /**

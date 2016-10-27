@@ -12,8 +12,8 @@ class CreateTest extends TestCase
      *
      * @return void
      */
-    use DatabaseMigrations;
-    use DatabaseTransactions;
+//    use DatabaseMigrations;
+//    use DatabaseTransactions;
     public $price = 1.7;
     public $duration = 12;
     public $user;
@@ -93,12 +93,27 @@ class CreateTest extends TestCase
             ->see('Price: ' . $this->price * $this->duration);
     }
 
+    public function editUser()
+    {
+        $this->visit('/admin/users/2/edit')
+            ->type('Yurec', 'name')
+            ->type('yurchik', 'username')
+            ->type('123qwe', 'password')
+            ->press('Save')
+            ->seePageIs('/admin/users');
+        $this->seeInDatabase('users', [
+            'name' => 'Yurec',
+            'username' => 'yurchik'
+        ]);
+    }
+
     public function testExample()
     {
         $this->Login();
-        $this->createUser();
-        $this->createDevice();
-        $this->createPrice();
-        $this->createEvent();
+        $this->editUser();
+//        $this->createUser();
+//        $this->createDevice();
+//        $this->createPrice();
+//        $this->createEvent();
     }
 }
