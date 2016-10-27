@@ -1,11 +1,18 @@
 <?php
 
-//need this if you add clearDB on Heroku
+//Heroku ClearDB config
 $url = parse_url(env("CLEARDB_DATABASE_URL"));
-$host = $url["host"];
-$database = substr($url["path"], 1);
-$username = $url["user"];
-$password = $url["pass"];
+$host = null;
+$database = null;
+$username = null;
+$password = null;
+if (empty($url)) {
+    $host = $url["host"];
+    $database = substr($url["path"], 1);
+    $username = $url["user"];
+    $password = $url["pass"];
+}
+
 
 return [
 
@@ -62,11 +69,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => $host,
+            'host' => env('localhost', $host),
             'port' => env('DB_PORT', '3306'),
-            'database' => $database,
-            'username' => $username,
-            'password' => $password,
+            'database' => env('DB_DATABASE', $database),
+            'username' => env('DB_USERNAME', $username),
+            'password' => env('DB_PASSWORD', $password),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
