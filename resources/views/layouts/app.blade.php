@@ -111,13 +111,15 @@
 <script>
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
+    var priceInput = $('#ajaxPriceCalculate');
+
     function calculate() {
         $.ajax({
             type: 'POST',
             url: '/ajaxPrice',
             data: {
                 device_id: $('input[name=device_id]:checked').val(),
-                duration: $(this).val(),
+                duration: priceInput.val(),
                 _token: CSRF_TOKEN
             }
         }).done(function (price) {
@@ -125,7 +127,7 @@
         });
     }
 
-    $('#ajaxPriceCalculate').on('change keyup', calculate);
+    priceInput.on('change keyup', calculate);
     $('input[name=device_id]').change(calculate);
 
     function showEdits(id) {
