@@ -2,17 +2,10 @@
 
 //Heroku ClearDB config
 $url = parse_url(env("CLEARDB_DATABASE_URL"));
-$host = null;
-$database = null;
-$username = null;
-$password = null;
-if (empty($url)) {
-    $host = $url["host"];
-    $database = substr($url["path"], 1);
-    $username = $url["user"];
-    $password = $url["pass"];
-}
-
+$host = $url["host"];
+$database = substr($url["path"], 1);
+$username = $url["user"];
+$password = $url["pass"];
 
 return [
 
@@ -69,11 +62,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('localhost', $host),
+            'host' => $host,
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', $database),
-            'username' => env('DB_USERNAME', $username),
-            'password' => env('DB_PASSWORD', $password),
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
