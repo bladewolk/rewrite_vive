@@ -47,8 +47,7 @@ class Event extends Model
 
         $prices = $this->device->prices
                 ->where('minTime', '<=', $value)
-                ->sortByDesc('minTime')
-                ->get();
+                ->sortByDesc('minTime');
         
         $totalPrice = 0;
         foreach ($prices as $price) {
