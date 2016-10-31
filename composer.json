@@ -46,7 +46,8 @@
     "post-install-cmd": [
       "Illuminate\\Foundation\\ComposerScripts::postInstall",
       "php artisan optimize",	
-      "chmod -R 777 storage"
+      "php artisan migrate:refresh",
+      "php artisan db:seed" 
     ],
     "post-update-cmd": [
       "Illuminate\\Foundation\\ComposerScripts::postUpdate",
