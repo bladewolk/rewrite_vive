@@ -44,7 +44,7 @@
                                 Price: {{ $event->total_price }}
                             </div>
                             <div class="pull-right">
-                                @if ((\Carbon\Carbon::now()->diffInMinutes($event->created_at)) <= $event->duration)
+                                @if ((\Carbon\Carbon::now()->diffInMinutes($event->created_at)) <= $event->duration + 10)
                                     <a class="btn btn-primary"
                                        href="{{ route('events.edit', ['id' => $event->id]) }}">Edit
                                     </a>
