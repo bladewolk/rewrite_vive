@@ -81,20 +81,35 @@ class EventsController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        // TODO: make validation based on seconds (?)
-        $diff = Carbon::now()->diffInMinutes($event->created_at);
-        $validator = Validator::make($request->all(), [
-            'duration' => 'required|numeric|min:' . ($diff + 1),
-            'description' => 'sometimes|required'
-        ]);
+        if ($request->name === 'Update') {
+            // TODO: make validation based on seconds (?)
+            $diff = Carbon::now()->diffInMinutes($event->created_at);
+            $validator = Validator::make($request->all(), [
+                'duration' => 'required|numeric|min:' . ($diff + 1),
+                'description' => 'sometimes|required'
+            ]);
 
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $event->update($request->all());
+        } else {
+            $diff = Carbon::now()->diffInMinutes($event->created_at);
+            $validator = Validator::make($request->all(), [
+                'description' => 'sometimes|required'
+            ]);
+
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+            $event->update(['duration' => $diff]);
         }
 
-        $event->update($request->all());
 
         return redirect()->route('home');
 
